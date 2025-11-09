@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo | Curso TEACCH</title>
+    <style>
+        /* CSS básico temporal - después lo mejoramos */
+        
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .module-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .content-section {
+            margin: 30px 0;
+        }
+        
+        .activity {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .quiz {
+            background: #f0f8f0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="module-container">
+        <!-- Encabezado del módulo -->
+        <header class="module-header">
+            <h1 id="module-title">Título del Módulo</h1>
+            <p id="module-duration">Duración: XX minutos</p>
+            <p id="module-objectives">Objetivos de aprendizaje...</p>
+        </header>
+
+        <!-- Navegación entre módulos -->
+        <div class="nav-buttons">
+            <button id="prev-module">← Módulo Anterior</button>
+            <button id="home-button">Inicio</button>
+            <button id="next-module">Siguiente Módulo →</button>
+        </div>
+
+        <!-- Contenido principal -->
+        <section class="content-section" id="theoretical-content">
+            <h2>Contenido Teórico</h2>
+            <div id="content-text">
+                <!-- Aquí va el contenido específico de cada módulo -->
+            </div>
+        </section>
+
+        <!-- Actividad interactiva -->
+        <section class="content-section activity" id="interactive-activity">
+            <h2>Actividad Interactiva</h2>
+            <div id="activity-container">
+                <!-- Aquí va la actividad específica de cada módulo -->
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section class="content-section quiz" id="evaluation">
+            <h2>Evaluación</h2>
+            <div id="quiz-container">
+                <!-- Aquí van las preguntas del quiz -->
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section class="content-section" id="resources">
+            <h2>Recursos del Módulo</h2>
+            <div id="resources-container">
+                <!-- Recursos multimedia -->
+            </div>
+        </section>
+
+        <!-- Navegación inferior -->
+        <div class="nav-buttons">
+            <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button id="home-button-bottom">Inicio</button>
+            <button id="next-module-bottom">Siguiente Módulo →</button>
+        </div>
+    </div>
+
+    <script>
+        // DATOS COMUNES PARA TODOS LOS MÓDULOS
+        const courseModules = {
+            module1: {
+                title: "Módulo 1: ¿Qué es el método TEACCH y sus objetivos?",
+                duration: "15 minutos",
+                file: "modulo1.html",
+                next: "module2",
+                prev: null
+            },
+            module2: {
+                title: "Módulo 2: Beneficios del método TEACCH",
+                duration: "10 minutos",
+                file: "modulo2.html",
+                next: "module3",
+                prev: "module1"
+            },
+            module3: {
+                title: "Módulo 3: Enseñanza estructurada: el corazón del TEACCH",
+                duration: "15 minutos",
+                file: "modulo3.html",
+                next: "module4",
+                prev: "module2"
+            },
+            module4: {
+                title: "Módulo 4: Estructura física y sistema de trabajo",
+                duration: "15 minutos",
+                file: "modulo4.html",
+                next: "module5",
+                prev: "module3"
+            },
+            module5: {
+                title: "Módulo 5: Horarios y organización del entorno",
+                duration: "15 minutos",
+                file: "modulo5.html",
+                next: "module6",
+                prev: "module4"
+            },
+            module6: {
+                title: "Módulo 6: Aplicar e integrar el método TEACCH",
+                duration: "20 minutos",
+                file: "modulo6.html",
+                next: null,
+                prev: "module5"
+            }
+        };
+
+        // DETECTAR MÓDULO ACTUAL
+        function getCurrentModule() {
+            const currentFile = window.location.pathname.split('/').pop();
+            for (const [key, module] of Object.entries(courseModules)) {
+                if (module.file === currentFile) {
+                    return key;
+                }
+            }
+            return 'module1'; // Por defecto
+        }
+
+        // CONFIGURAR NAVEGACIÓN
+        function setupNavigation() {
+            const currentModule = getCurrentModule();
+            const module = courseModules[currentModule];
+
+            // Configurar título y datos del módulo
+            document.getElementById('module-title').textContent = module.title;
+            document.getElementById('module-duration').textContent = `Duración: ${module.duration}`;
+
+            // Configurar botones de navegación
+            const prevButtons = document.querySelectorAll('#prev-module, #prev-module-bottom');
+            const nextButtons = document.querySelectorAll('#next-module, #next-module-bottom');
+            const homeButtons = document.querySelectorAll('#home-button, #home-button-bottom');
+
+            // Botón anterior
+            prevButtons.forEach(btn => {
+                if (module.prev) {
+                    btn.onclick = () => window.location.href = courseModules[module.prev].file;
+                } else {
+                    btn.disabled = true;
+                    btn.style.background = '#ccc';
+                }
+            });
+
+            // Botón siguiente
+            nextButtons.forEach(btn => {
+                if (module.next) {
+                    btn.onclick = () => window.location.href = courseModules[module.next].file;
+                } else {
+                    btn.disabled = true;
+                    btn.style.background = '#ccc';
+                }
+            });
+
+            // Botón inicio
+            homeButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = 'index.html';
+            });
+        }
+
+        // INICIALIZAR AL CARGAR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            console.log(`Módulo ${getCurrentModule()} cargado correctamente`);
+        });
+
+        // FUNCIONES REUTILIZABLES PARA ACTIVIDADES
+        const ActivityUtils = {
+            // Para quizzes de opción múltiple
+            createMultipleChoiceQuiz: function(questions) {
+                // Lógica genérica para quizzes
+            },
+
+            // Para actividades de arrastrar y soltar
+            setupDragDrop: function(containerId, items) {
+                // Lógica genérica para drag & drop
+            },
+
+            // Para actividades de relacionar columnas
+            setupMatchingActivity: function(leftItems, rightItems) {
+                // Lógica genérica para matching
+            }
+        };
+    </script>
+</body>
+
+</html>

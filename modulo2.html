@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo | Curso TEACCH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .module-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        button:hover:not(:disabled) {
+            background: #3a5a80;
+        }
+        
+        .content-section {
+            margin: 40px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
+        }
+        
+        .quiz {
+            background: #f0f8f0;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .quiz-question {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            color: #4a6fa5;
+            margin: 20px 0 10px 0;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="module-container">
+        <!-- Encabezado del módulo -->
+        <header class="module-header">
+            <h1>Módulo 2: Beneficios del método TEACCH</h1>
+            <p><strong>Duración:</strong> 10 minutos</p>
+            <div class="objectives">
+                <h3>Objetivos de aprendizaje:</h3>
+                <ul>
+                    <li>Reconocer los beneficios del método TEACCH</li>
+                    <li>Analizar su impacto en la autonomía y adaptación del alumno con TEA</li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Navegación entre módulos -->
+        <div class="nav-buttons">
+            <button id="prev-module">← Módulo Anterior</button>
+            <button id="home-button">Inicio</button>
+            <button id="next-module">Siguiente Módulo →</button>
+        </div>
+
+        <!-- Contenido principal -->
+        <section class="content-section" id="theoretical-content">
+            <h2>Contenido Principal</h2>
+
+            <div id="content-text">
+                <h3>Beneficios Clave TEACCH</h3>
+                <p>🏠 Para la persona con TEA:</p>
+                <ul>
+                    <li><strong>Independencia: </strong>Aprende a trabajar y vivir con menos ayuda constante</li>
+                    <li><strong>Menos ansiedad: </strong>La estructura visual hace el mundo predecible</li>
+                    <li><strong>Desarrollo de fortalezas: </strong>Se aprovechan sus habilidades visuales y memoria</li>
+                </ul>
+
+                <p>👨‍👩‍👧‍👦 Para familias:</p>
+                <ul>
+                    <li><strong>Menos estrés: </strong>Rutinas claras = menos crisis y conflictos</li>
+                    <li><strong>Mejor comunicación: </strong>Sistemas visuales que todos entienden</li>
+                    <li><strong>Calidad de vida: </strong>Menos lucha diaria, más armonía</li>
+                </ul>
+
+                <p>📈 Resultados comprobados:</p>
+                <ul>
+                    <li>Programa con 50+ años de experiencia</li>
+                    <li>Usado en más de 20 países</li>
+                    <li>Miles de personas beneficiadas en Carolina del Norte</li>
+                </ul>
+
+                <p>✨ Impacto real:</p>
+                <ul>
+                    <li>De "no saber qué hacer" → a tener un plan claro</li>
+                    <li>De crisis constantes → a rutinas tranquilas</li>
+                    <li>De dependencia total → a autonomía progresiva</li>
+                </ul>
+
+                <blockquote style="background: #f8f9fa; padding: 15px; border-left: 4px solid #4a6fa5; margin: 20px 0;">
+                    <em>"Implementar TEACCH mejora la calidad de vida tanto de los estudiantes con TEA como de sus familias. Fomenta la independencia y la comprensión del entorno mediante una estructura clara y visual."</em>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD INTERACTIVA: COMPARATIVO ANTES/DESPUÉS -->
+        <section class="content-section activity" id="interactive-activity">
+            <h2>Actividad Interactiva: Antes y Después del TEACCH</h2>
+            <p>Arrastra cada situación al escenario correcto para ver el impacto del método TEACCH:</p>
+
+            <div class="comparison-activity">
+                <div class="scenarios-container">
+                    <!-- Escenario ANTES -->
+                    <div class="scenario" id="before-scenario">
+                        <h3>🔴 ANTES del TEACCH</h3>
+                        <div class="scenario-content" id="before-items">
+                            <p>Suelta aquí las situaciones problemáticas...</p>
+                        </div>
+                    </div>
+
+                    <!-- Escenario DESPUÉS -->
+                    <div class="scenario" id="after-scenario">
+                        <h3>🟢 DESPUÉS del TEACCH</h3>
+                        <div class="scenario-content" id="after-items">
+                            <p>Suelta aquí las mejoras...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Situaciones para arrastrar -->
+                <div class="draggable-items">
+                    <div class="draggable-item" data-correct="after" data-pair="1">
+                        Crisis constantes por cambios inesperados
+                    </div>
+                    <div class="draggable-item" data-correct="before" data-pair="1">
+                        Rutinas visuales que anticipan cambios
+                    </div>
+
+                    <div class="draggable-item" data-correct="after" data-pair="2">
+                        Dependencia total para actividades básicas
+                    </div>
+                    <div class="draggable-item" data-correct="before" data-pair="2">
+                        Sistema de trabajo independiente claro
+                    </div>
+
+                    <div class="draggable-item" data-correct="after" data-pair="3">
+                        Falta de comunicación efectiva
+                    </div>
+                    <div class="draggable-item" data-correct="before" data-pair="3">
+                        Sistema de comunicación visual entendido por todos
+                    </div>
+
+                    <div class="draggable-item" data-correct="after" data-pair="4">
+                        Estrés familiar por falta de estructura
+                    </div>
+                    <div class="draggable-item" data-correct="before" data-pair="4">
+                        Armonía familiar con rutinas establecidas
+                    </div>
+                </div>
+
+                <button id="check-comparison">Verificar respuestas</button>
+                <div id="comparison-feedback" class="feedback"></div>
+            </div>
+        </section>
+
+        <!-- EVALUACIÓN: FALSO/VERDADERO -->
+        <section class="content-section quiz" id="evaluation">
+            <h2>Evaluación: ¿Verdadero o Falso?</h2>
+
+            <div id="quiz-container">
+                <div class="quiz-question">
+                    <p><strong>1. El método TEACCH solo funciona con niños pequeños, no con adolescentes o adultos.</strong></p>
+                    <input type="radio" name="q1" value="false"> Falso<br>
+                    <input type="radio" name="q1" value="true"> Verdadero<br>
+                    <div id="feedback-q1" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>2. La estructura visual del TEACCH reduce la ansiedad en personas con TEA.</strong></p>
+                    <input type="radio" name="q2" value="true"> Verdadero<br>
+                    <input type="radio" name="q2" value="false"> Falso<br>
+                    <div id="feedback-q2" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>3. TEACCH se enfoca principalmente en corregir las debilidades en lugar de desarrollar fortalezas.</strong></p>
+                    <input type="radio" name="q3" value="false"> Falso<br>
+                    <input type="radio" name="q3" value="true"> Verdadero<br>
+                    <div id="feedback-q3" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>4. El programa TEACCH ha demostrado beneficios tanto para la persona con TEA como para su familia.</strong></p>
+                    <input type="radio" name="q4" value="true"> Verdadero<br>
+                    <input type="radio" name="q4" value="false"> Falso<br>
+                    <div id="feedback-q4" class="feedback"></div>
+                </div>
+
+                <button id="submit-quiz">Enviar respuestas</button>
+                <div id="quiz-result" class="feedback" style="margin-top: 20px;"></div>
+            </div>
+        </section>
+
+        <style>
+            /* ESTILOS PARA LA ACTIVIDAD DE COMPARACIÓN */
+            
+            .comparison-activity {
+                margin: 20px 0;
+            }
+            
+            .scenarios-container {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .scenario {
+                flex: 1;
+                padding: 15px;
+                border-radius: 8px;
+                min-height: 200px;
+            }
+            
+            #before-scenario {
+                background: #ffe6e6;
+                border: 2px solid #ff4444;
+            }
+            
+            #after-scenario {
+                background: #e6ffe6;
+                border: 2px solid #44ff44;
+            }
+            
+            .scenario-content {
+                min-height: 150px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.7);
+                border-radius: 4px;
+            }
+            
+            .draggable-items {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 20px 0;
+            }
+            
+            .draggable-item {
+                background: white;
+                padding: 12px;
+                border: 2px dashed #4a6fa5;
+                border-radius: 6px;
+                cursor: move;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .draggable-item.dragging {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+            
+            .draggable-item.correct-position {
+                border-color: #2ecc71;
+                background: #d4edda;
+            }
+            
+            .draggable-item.incorrect-position {
+                border-color: #e74c3c;
+                background: #f8d7da;
+            }
+        </style>
+
+        <!-- Recursos -->
+        <section class="content-section" id="resources">
+            <h2>Recursos del Módulo</h2>
+            <div id="resources-container">
+                <!-- Recursos multimedia -->
+            </div>
+        </section>
+
+        <!-- Navegación inferior -->
+        <div class="nav-buttons">
+            <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button id="home-button-bottom">Inicio</button>
+            <button id="next-module-bottom">Siguiente Módulo →</button>
+        </div>
+    </div>
+
+    <script>
+        // DATOS COMUNES PARA TODOS LOS MÓDULOS
+        const courseModules = {
+            module1: {
+                title: "Módulo 1: ¿Qué es el método TEACCH y sus objetivos?",
+                duration: "15 minutos",
+                file: "modulo1.html",
+                next: "module2",
+                prev: null
+            },
+            module2: {
+                title: "Módulo 2: Beneficios del método TEACCH",
+                duration: "10 minutos",
+                file: "modulo2.html",
+                next: "module3",
+                prev: "module1"
+            },
+            module3: {
+                title: "Módulo 3: Enseñanza estructurada: el corazón del TEACCH",
+                duration: "15 minutos",
+                file: "modulo3.html",
+                next: "module4",
+                prev: "module2"
+            },
+            module4: {
+                title: "Módulo 4: Estructura física y sistema de trabajo",
+                duration: "15 minutos",
+                file: "modulo4.html",
+                next: "module5",
+                prev: "module3"
+            },
+            module5: {
+                title: "Módulo 5: Horarios y organización del entorno",
+                duration: "15 minutos",
+                file: "modulo5.html",
+                next: "module6",
+                prev: "module4"
+            },
+            module6: {
+                title: "Módulo 6: Aplicar e integrar el método TEACCH",
+                duration: "20 minutos",
+                file: "modulo6.html",
+                next: null,
+                prev: "module5"
+            }
+        };
+
+        // DETECTAR MÓDULO ACTUAL
+        function getCurrentModule() {
+            return 'module2'; // Este es el módulo 2
+        }
+
+        // CONFIGURAR NAVEGACIÓN
+        function setupNavigation() {
+            const currentModule = getCurrentModule();
+            const module = courseModules[currentModule];
+
+            // Configurar botones de navegación
+            const prevButtons = document.querySelectorAll('#prev-module, #prev-module-bottom');
+            const nextButtons = document.querySelectorAll('#next-module, #next-module-bottom');
+            const homeButtons = document.querySelectorAll('#home-button, #home-button-bottom');
+
+            // Botón anterior
+            prevButtons.forEach(btn => {
+                // btn.disabled = false;
+                btn.onclick = () => window.location.href = courseModules[module.prev].file;
+            });
+
+            // Botón siguiente
+            nextButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = courseModules[module.next].file;
+            });
+
+            // Botón inicio
+            homeButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = 'index.html';
+            });
+        }
+
+
+        // ACTIVIDAD DE COMPARACIÓN ANTES/DESPUÉS
+        function setupComparisonActivity() {
+            const draggableItems = document.querySelectorAll('.draggable-item');
+            const beforeScenario = document.getElementById('before-items');
+            const afterScenario = document.getElementById('after-items');
+            const checkButton = document.getElementById('check-comparison');
+            const feedback = document.getElementById('comparison-feedback');
+
+            let draggedItem = null;
+
+            // Configurar drag and drop
+            draggableItems.forEach(item => {
+                item.setAttribute('draggable', 'true');
+
+                item.addEventListener('dragstart', function(e) {
+                    draggedItem = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    draggedItem = null;
+                });
+            });
+
+            // Configurar zonas de destino
+            [beforeScenario, afterScenario].forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (draggedItem && !this.contains(draggedItem)) {
+                        // Remover de ubicación anterior
+                        if (draggedItem.parentElement.classList.contains('scenario-content')) {
+                            draggedItem.parentElement.appendChild = null;
+                        }
+
+                        this.appendChild(draggedItem);
+                        draggedItem.style.margin = '5px 0';
+                    }
+                });
+            });
+
+            // Verificar respuestas
+            checkButton.addEventListener('click', function() {
+                let correctCount = 0;
+                const totalPairs = 4;
+
+                // Verificar cada ítem
+                draggableItems.forEach(item => {
+                    const correctZone = item.getAttribute('data-correct');
+                    const currentZone = item.parentElement.id;
+
+                    item.classList.remove('correct-position', 'incorrect-position');
+
+                    if (currentZone === `${correctZone}-items`) {
+                        item.classList.add('correct-position');
+                        correctCount++;
+                    } else if (currentZone.includes('items')) {
+                        item.classList.add('incorrect-position');
+                    }
+                });
+
+                // Mostrar feedback
+                if (correctCount === totalPairs * 2) { // 2 items por par × 4 pares
+                    feedback.textContent = '¡Excelente! Has comprendido perfectamente los beneficios del método TEACCH.';
+                    feedback.className = 'feedback correct';
+                } else {
+                    feedback.textContent = `Tienes ${correctCount/2} de ${totalPairs} pares correctos. Revisa las que están en rojo.`;
+                    feedback.className = 'feedback incorrect';
+                }
+                feedback.style.display = 'block';
+            });
+        }
+
+        // QUIZ FALSO/VERDADERO
+        function setupQuiz() {
+            const submitButton = document.getElementById('submit-quiz');
+            const quizResult = document.getElementById('quiz-result');
+
+            submitButton.addEventListener('click', function() {
+                // Respuestas correctas
+                const correctAnswers = {
+                    q1: 'false',
+                    q2: 'true',
+                    q3: 'false',
+                    q4: 'true'
+                };
+
+                let score = 0;
+                const totalQuestions = Object.keys(correctAnswers).length;
+
+                // Verificar cada pregunta
+                Object.keys(correctAnswers).forEach(question => {
+                    const selected = document.querySelector(`input[name="${question}"]:checked`);
+                    const feedback = document.getElementById(`feedback-${question}`);
+
+                    if (selected) {
+                        if (selected.value === correctAnswers[question]) {
+                            score++;
+                            feedback.textContent = '✓ Correcto';
+                            feedback.className = 'feedback correct';
+                        } else {
+                            feedback.textContent = '✗ Incorrecto';
+                            feedback.className = 'feedback incorrect';
+                        }
+                    } else {
+                        feedback.textContent = 'Por favor selecciona una respuesta';
+                        feedback.className = 'feedback incorrect';
+                    }
+                    feedback.style.display = 'block';
+                });
+
+                // Mostrar resultado
+                quizResult.textContent = `Obtuviste ${score} de ${totalQuestions} correctas.`;
+                quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
+                quizResult.style.display = 'block';
+
+                if (score === totalQuestions) {
+                    quizResult.textContent += ' ¡Perfecto! Dominas los beneficios del TEACCH.';
+                }
+            });
+        }
+
+        // Inicializar cuando cargue la página
+        document.addEventListener('DOMContentLoaded', function() {
+            setupComparisonActivity();
+            setupNavigation();
+            setupQuiz();
+        });
+    </script>
+</body>
+
+</html>
