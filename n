@@ -1,7 +1,0 @@
-<script>
-    // Inicializar cuando cargue la página
-    document.addEventListener('DOMContentLoaded', function() {
-        setupComparisonActivity();
-        setupQuiz();
-    });
-</script>

@@ -4,54 +4,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo | Curso TEACCH</title>
+    <title>Módulo 4: Estructura física y sistema de trabajo | Curso TEACCH</title>
     <style>
-        /* CSS básico temporal - después lo mejoramos */
-        
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background: #f5f5f5;
+            line-height: 1.6;
         }
         
         .module-container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #4a6fa5;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        button:hover:not(:disabled) {
+            background: #3a5a80;
         }
         
         .content-section {
-            margin: 30px 0;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
         }
         
         .activity {
             background: #e8f4f8;
-            padding: 15px;
-            border-radius: 4px;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
         }
         
         .quiz {
             background: #f0f8f0;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .classroom-activity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .classroom-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .classroom-item {
+            background: white;
             padding: 15px;
+            border-radius: 6px;
+            border: 2px dashed #ccc;
+            cursor: move;
+            text-align: center;
+        }
+        
+        .classroom-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .classroom-layout {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            min-height: 400px;
+            border: 2px solid #ddd;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .classroom-zone {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid #eee;
+            min-height: 80px;
+        }
+        
+        .zone-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4a6fa5;
+        }
+        
+        .quiz-question {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
             border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            color: #4a6fa5;
+            margin: 20px 0 10px 0;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .component-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
         }
     </style>
 </head>
@@ -60,9 +190,15 @@
     <div class="module-container">
         <!-- Encabezado del módulo -->
         <header class="module-header">
-            <h1 id="module-title">Título del Módulo</h1>
-            <p id="module-duration">Duración: XX minutos</p>
-            <p id="module-objectives">Objetivos de aprendizaje...</p>
+            <h1>Módulo 4: Estructura física y sistema de trabajo</h1>
+            <p><strong>Duración:</strong> 15 minutos</p>
+            <div class="objectives">
+                <h3>Objetivos de aprendizaje:</h3>
+                <ul>
+                    <li>Aplicar principios de estructuración física en espacios educativos</li>
+                    <li>Comprender cómo los sistemas de trabajo promueven independencia</li>
+                </ul>
+            </div>
         </header>
 
         <!-- Navegación entre módulos -->
@@ -72,27 +208,139 @@
             <button id="next-module">Siguiente Módulo →</button>
         </div>
 
-        <!-- Contenido principal -->
+        <!-- Contenido teórico -->
         <section class="content-section" id="theoretical-content">
             <h2>Contenido Teórico</h2>
+
             <div id="content-text">
-                <!-- Aquí va el contenido específico de cada módulo -->
+                <h3>Estructura física del entorno</h3>
+                <p>La organización del espacio hace el aula más comprensible y manejable para alumnos con TEA. La distribución del mobiliario debe adaptarse a sus estilos de aprendizaje y necesidades sensoriales.</p>
+
+                <h3>Principios esenciales</h3>
+                <ul>
+                    <li><strong>Límites físicos/visuales claros:</strong> Cada actividad asociada a un espacio específico</li>
+                    <li><strong>Minimizar distracciones:</strong> Evitar sobrecarga sensorial y ayudar al enfoque</li>
+                </ul>
+
+                <h3>Áreas básicas en un aula estructurada</h3>
+                <ul>
+                    <li>Trabajo "Uno a uno"</li>
+                    <li>Trabajo Independiente</li>
+                    <li>Transición</li>
+                    <li>Juego/ocio</li>
+                    <li>Actividades de grupo</li>
+                    <li>Área de comidas y descanso</li>
+                </ul>
+
+                <h3>Sistemas de trabajo</h3>
+                <p>Permiten trabajar sin supervisión directa, respondiendo a necesidades organizativas fundamentales.</p>
+
+                <h3>Las 4 preguntas clave</h3>
+                <ul>
+                    <li><strong>¿Qué trabajo hacer?</strong> - Identificar la tarea</li>
+                    <li><strong>¿Cuánto trabajo?</strong> - Conocer la cantidad</li>
+                    <li><strong>¿Cuándo termina?</strong> - Reconocer la finalización</li>
+                    <li><strong>¿Qué sigue después?</strong> - Saber la siguiente actividad</li>
+                </ul>
+
+                <h3>Formatos según nivel</h3>
+                <ul>
+                    <li><strong>Sistemas básicos:</strong> Izquierda a derecha con recipiente "terminado"</li>
+                    <li><strong>Sistemas intermedios:</strong> Emparejamiento por colores, formas</li>
+                    <li><strong>Sistemas avanzados:</strong> Listas escritas para estudiantes lectores</li>
+                </ul>
+
+                <h3>El concepto de "terminado"</h3>
+                <p>Elemento organizador clave que proporciona seguridad y reduce ansiedad.</p>
+
+                <h3>Estrategias visuales</h3>
+                <ul>
+                    <li>Cajas vacías = trabajo terminado</li>
+                    <li>Pinzas que se retiran progresivamente</li>
+                    <li>Símbolos que desaparecen al completar tareas</li>
+                    <li>Final de página indica conclusión</li>
+                </ul>
+
+                <blockquote style="background: #f8f9fa; padding: 15px; border-left: 4px solid #4a6fa5; margin: 20px 0;">
+                    <em>"Un aula estructurada es clave para el éxito del método TEACCH. Cada zona tiene una función clara, ayudando al estudiante a anticipar y comprender las actividades del día."</em>
+                </blockquote>
             </div>
         </section>
 
-        <!-- Actividad interactiva -->
+        <!-- Actividad interactiva: Organizar aula -->
         <section class="content-section activity" id="interactive-activity">
-            <h2>Actividad Interactiva</h2>
-            <div id="activity-container">
-                <!-- Aquí va la actividad específica de cada módulo -->
+            <h2>Actividad Interactiva: Organiza un aula TEACCH</h2>
+            <p>Arrastra los elementos del aula a las zonas correctas según la estructura TEACCH:</p>
+
+            <div class="classroom-activity">
+                <div class="classroom-items">
+                    <div class="classroom-item" data-zone="trabajo-individual">Mesa individual con sistema de trabajo</div>
+                    <div class="classroom-item" data-zone="uno-a-uno">Mesa pequeña para trabajo con adulto</div>
+                    <div class="classroom-item" data-zone="grupo">Alfombra grande para actividades grupales</div>
+                    <div class="classroom-item" data-zone="transicion">Panel de horarios visuales</div>
+                    <div class="classroom-item" data-zone="ocio">Estante con juegos y materiales de ocio</div>
+                    <div class="classroom-item" data-zone="descanso">Sillón cómodo y cojines</div>
+                </div>
+
+                <div class="classroom-layout">
+                    <div class="classroom-zone" data-zone="uno-a-uno">
+                        <div class="zone-label">Trabajo Uno a Uno</div>
+                    </div>
+                    <div class="classroom-zone" data-zone="trabajo-individual">
+                        <div class="zone-label">Trabajo Individual</div>
+                    </div>
+                    <div class="classroom-zone" data-zone="grupo">
+                        <div class="zone-label">Actividades de Grupo</div>
+                    </div>
+                    <div class="classroom-zone" data-zone="ocio">
+                        <div class="zone-label">Juego/Ocio</div>
+                    </div>
+                </div>
             </div>
+
+            <button id="check-classroom" style="align-self: flex-start;">Verificar organización</button>
+            <div id="classroom-feedback" class="feedback"></div>
         </section>
 
-        <!-- Evaluación -->
+        <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
-            <h2>Evaluación</h2>
+            <h2>Evaluación: Conocimientos del Módulo 4</h2>
+
             <div id="quiz-container">
-                <!-- Aquí van las preguntas del quiz -->
+                <div class="quiz-question">
+                    <p><strong>1. ¿Cuál es el propósito principal de la estructura física en TEACCH?</strong></p>
+                    <input type="radio" name="q1" value="a"> a) Hacer el aula más bonita<br>
+                    <input type="radio" name="q1" value="b"> b) Hacer el entorno más comprensible y manejable<br>
+                    <input type="radio" name="q1" value="c"> c) Reducir costos de mobiliario<br>
+                    <div id="feedback-q1" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>2. ¿Cuál de estas NO es una de las 4 preguntas clave de un sistema de trabajo?</strong></p>
+                    <input type="radio" name="q2" value="a"> a) ¿Qué trabajo hacer?<br>
+                    <input type="radio" name="q2" value="b"> b) ¿Cuánto trabajo hacer?<br>
+                    <input type="radio" name="q2" value="c"> c) ¿Qué colores usar?<br>
+                    <div id="feedback-q2" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>3. ¿Qué principio ayuda a minimizar la sobrecarga sensorial?</strong></p>
+                    <input type="radio" name="q3" value="a"> a) Maximizar estímulos<br>
+                    <input type="radio" name="q3" value="b"> b) Establecer límites visuales claros<br>
+                    <input type="radio" name="q3" value="c"> c) Usar solo materiales nuevos<br>
+                    <div id="feedback-q3" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>4. ¿Para qué sirve el concepto de "terminado" en los sistemas de trabajo?</strong></p>
+                    <input type="radio" name="q4" value="a"> a) Proporcionar seguridad y reducir ansiedad<br>
+                    <input type="radio" name="q4" value="b"> b) Hacer las tareas más largas<br>
+                    <input type="radio" name="q4" value="c"> c) Evitar que los estudiantes terminen rápido<br>
+                    <div id="feedback-q4" class="feedback"></div>
+                </div>
+
+                <button id="submit-quiz">Enviar respuestas</button>
+                <div id="quiz-result" class="feedback" style="margin-top: 20px;"></div>
             </div>
         </section>
 
@@ -100,7 +348,12 @@
         <section class="content-section" id="resources">
             <h2>Recursos del Módulo</h2>
             <div id="resources-container">
-                <!-- Recursos multimedia -->
+                <p><strong>Recursos multimedia sugeridos:</strong></p>
+                <ul>
+                    <li>Simulación interactiva de aula</li>
+                    <li>Imágenes de ejemplos reales de estructura física</li>
+                    <li>Video demostrativo de sistemas de trabajo</li>
+                </ul>
             </div>
         </section>
 
@@ -161,23 +414,13 @@
 
         // DETECTAR MÓDULO ACTUAL
         function getCurrentModule() {
-            const currentFile = window.location.pathname.split('/').pop();
-            for (const [key, module] of Object.entries(courseModules)) {
-                if (module.file === currentFile) {
-                    return key;
-                }
-            }
-            return 'module1'; // Por defecto
+            return 'module4'; // Este es el módulo 4
         }
 
         // CONFIGURAR NAVEGACIÓN
         function setupNavigation() {
             const currentModule = getCurrentModule();
             const module = courseModules[currentModule];
-
-            // Configurar título y datos del módulo
-            document.getElementById('module-title').textContent = module.title;
-            document.getElementById('module-duration').textContent = `Duración: ${module.duration}`;
 
             // Configurar botones de navegación
             const prevButtons = document.querySelectorAll('#prev-module, #prev-module-bottom');
@@ -186,22 +429,12 @@
 
             // Botón anterior
             prevButtons.forEach(btn => {
-                if (module.prev) {
-                    btn.onclick = () => window.location.href = courseModules[module.prev].file;
-                } else {
-                    btn.disabled = true;
-                    btn.style.background = '#ccc';
-                }
+                btn.onclick = () => window.location.href = courseModules[module.prev].file;
             });
 
             // Botón siguiente
             nextButtons.forEach(btn => {
-                if (module.next) {
-                    btn.onclick = () => window.location.href = courseModules[module.next].file;
-                } else {
-                    btn.disabled = true;
-                    btn.style.background = '#ccc';
-                }
+                btn.onclick = () => window.location.href = courseModules[module.next].file;
             });
 
             // Botón inicio
@@ -210,29 +443,147 @@
             });
         }
 
+        // ACTIVIDAD DE ORGANIZACIÓN DE AULA
+        function setupClassroomActivity() {
+            const items = document.querySelectorAll('.classroom-item');
+            const zones = document.querySelectorAll('.classroom-zone');
+            const checkButton = document.getElementById('check-classroom');
+            const feedback = document.getElementById('classroom-feedback');
+
+            let draggedItem = null;
+
+            // Configurar drag and drop
+            items.forEach(item => {
+                item.setAttribute('draggable', 'true');
+
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    setTimeout(() => this.style.display = 'none', 0);
+                });
+
+                item.addEventListener('dragend', function() {
+                    setTimeout(() => {
+                        draggedItem = null;
+                    }, 0);
+                });
+            });
+
+            zones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (draggedItem) {
+                        // Si ya hay un elemento en esta zona, lo removemos primero
+                        const existingItem = this.querySelector('.classroom-item');
+                        if (existingItem) {
+                            existingItem.remove();
+                        }
+
+                        // Agregar el elemento arrastrado
+                        draggedItem.style.display = 'block';
+                        draggedItem.style.margin = '10px 0';
+                        draggedItem.style.cursor = 'default';
+                        this.appendChild(draggedItem);
+
+                        draggedItem = null;
+                    }
+                });
+            });
+
+            // Verificar organización correcta
+            checkButton.addEventListener('click', function() {
+                let correctCount = 0;
+                const totalItems = items.length;
+
+                items.forEach(item => {
+                    const correctZone = item.getAttribute('data-zone');
+                    const currentZone = item.parentElement.getAttribute('data-zone');
+
+                    if (currentZone === correctZone) {
+                        correctCount++;
+                        item.style.borderColor = '#2ecc71';
+                        item.style.background = '#d4edda';
+                    } else {
+                        item.style.borderColor = '#e74c3c';
+                        item.style.background = '#f8d7da';
+                    }
+                });
+
+                if (correctCount === totalItems) {
+                    feedback.textContent = '¡Excelente! Has organizado perfectamente el aula TEACCH según los principios de estructuración física.';
+                    feedback.className = 'feedback correct';
+                    feedback.style.display = 'block';
+                } else {
+                    feedback.textContent = `Tienes ${correctCount} de ${totalItems} elementos correctos. Los elementos en verde están bien ubicados, los rojos necesitan ajustes.`;
+                    feedback.className = 'feedback incorrect';
+                    feedback.style.display = 'block';
+                }
+            });
+        }
+
+        // EVALUACIÓN QUIZ
+        function setupQuiz() {
+            const submitButton = document.getElementById('submit-quiz');
+            const quizResult = document.getElementById('quiz-result');
+
+            submitButton.addEventListener('click', function() {
+                // Respuestas correctas
+                const correctAnswers = {
+                    q1: 'b',
+                    q2: 'c',
+                    q3: 'b',
+                    q4: 'a'
+                };
+
+                let score = 0;
+                const totalQuestions = Object.keys(correctAnswers).length;
+
+                // Verificar cada pregunta
+                Object.keys(correctAnswers).forEach(question => {
+                    const selected = document.querySelector(`input[name="${question}"]:checked`);
+                    const feedback = document.getElementById(`feedback-${question}`);
+
+                    if (selected) {
+                        if (selected.value === correctAnswers[question]) {
+                            score++;
+                            feedback.textContent = '✓ Respuesta correcta';
+                            feedback.className = 'feedback correct';
+                        } else {
+                            feedback.textContent = '✗ Respuesta incorrecta';
+                            feedback.className = 'feedback incorrect';
+                        }
+                    } else {
+                        feedback.textContent = 'Por favor selecciona una respuesta';
+                        feedback.className = 'feedback incorrect';
+                    }
+                    feedback.style.display = 'block';
+                });
+
+                // Mostrar resultado general
+                quizResult.textContent = `Obtuviste ${score} de ${totalQuestions} respuestas correctas.`;
+                quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
+                quizResult.style.display = 'block';
+
+                if (score === totalQuestions) {
+                    quizResult.textContent += ' ¡Excelente! Has comprendido los principios de estructura física y sistemas de trabajo.';
+                } else if (score >= 3) {
+                    quizResult.textContent += ' Buen trabajo, pero revisa los conceptos que no acertaste.';
+                } else {
+                    quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
+                }
+            });
+        }
+
         // INICIALIZAR AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {
             setupNavigation();
-            console.log(`Módulo ${getCurrentModule()} cargado correctamente`);
+            setupClassroomActivity();
+            setupQuiz();
+            console.log('Módulo 4 cargado correctamente');
         });
-
-        // FUNCIONES REUTILIZABLES PARA ACTIVIDADES
-        const ActivityUtils = {
-            // Para quizzes de opción múltiple
-            createMultipleChoiceQuiz: function(questions) {
-                // Lógica genérica para quizzes
-            },
-
-            // Para actividades de arrastrar y soltar
-            setupDragDrop: function(containerId, items) {
-                // Lógica genérica para drag & drop
-            },
-
-            // Para actividades de relacionar columnas
-            setupMatchingActivity: function(leftItems, rightItems) {
-                // Lógica genérica para matching
-            }
-        };
     </script>
 </body>
 
