@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso e-Learning: Método TEACCH</title>
+    <style>
+        /* Estilos básicos para que la página sea funcional */
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+        
+        .module-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .module-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #e8f4f8;
+            border-left: 4px solid #4a6fa5;
+            border-radius: 4px;
+        }
+        
+        .module-link {
+            display: block;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .module-link:hover {
+            color: #4a6fa5;
+        }
+        
+        .module-duration {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Encabezado de la página -->
+    <header>
+        <h1>Curso e-Learning: Método TEACCH</h1>
+        <p>Herramientas prácticas para el manejo del Trastorno del Espectro Autista (TEA)</p>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Información general del curso -->
+        <section id="course-info">
+            <h2>Información del Curso</h2>
+            <p><strong>Duración total:</strong> 90 minutos</p>
+            <p><strong>Dirigido a:</strong> Psicólogos educativos en formación</p>
+            <p><strong>Objetivo general:</strong> Otorgar herramientas prácticas para el manejo del Trastorno del Espectro Autista (TEA) mediante la implementación del método TEACCH.</p>
+        </section>
+
+        <!-- Lista de módulos del curso -->
+        <section id="modules">
+            <h2>Módulos del Curso</h2>
+            <ul class="module-list">
+                <!-- Módulo 1 -->
+                <li class="module-item">
+                    <a href="modulo1.html" class="module-link">Módulo 1: ¿Qué es el método TEACCH y sus objetivos?</a>
+                    <p class="module-duration">Duración: 15 minutos</p>
+                    <p>Comprender el origen, propósito y principios del método TEACCH.</p>
+                </li>
+
+                <!-- Módulo 2 -->
+                <li class="module-item">
+                    <a href="modulo2.html" class="module-link">Módulo 2: Beneficios del método TEACCH</a>
+                    <p class="module-duration">Duración: 10 minutos</p>
+                    <p>Reconocer los beneficios del método y analizar su impacto en la autonomía del alumno con TEA.</p>
+                </li>
+
+                <!-- Módulo 3 -->
+                <li class="module-item">
+                    <a href="modulo3.html" class="module-link">Módulo 3: Enseñanza estructurada: el corazón del TEACCH</a>
+                    <p class="module-duration">Duración: 15 minutos</p>
+                    <p>Comprender los fundamentos de la enseñanza estructurada e identificar sus componentes visuales y espaciales.</p>
+                </li>
+
+                <!-- Módulo 4 -->
+                <li class="module-item">
+                    <a href="modulo4.html" class="module-link">Módulo 4: Estructura física y sistema de trabajo</a>
+                    <p class="module-duration">Duración: 15 minutos</p>
+                    <p>Aplicar principios de estructuración física en espacios educativos y comprender cómo los sistemas de trabajo promueven independencia.</p>
+                </li>
+
+                <!-- Módulo 5 -->
+                <li class="module-item">
+                    <a href="modulo5.html" class="module-link">Módulo 5: Horarios y organización del entorno</a>
+                    <p class="module-duration">Duración: 15 minutos</p>
+                    <p>Diseñar horarios visuales ajustados al nivel del alumno y analizar cómo las rutinas estructuradas reducen ansiedad.</p>
+                </li>
+
+                <!-- Módulo 6 -->
+                <li class="module-item">
+                    <a href="modulo6.html" class="module-link">Módulo 6: Aplicar e integrar el método TEACCH como psicólogos educativos</a>
+                    <p class="module-duration">Duración: 20 minutos</p>
+                    <p>Diseñar estrategias prácticas para aplicar TEACCH en contextos escolares y familiares, integrando el enfoque colaborativo.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Instrucciones para comenzar -->
+        <section id="start-instructions">
+            <h2>¿Cómo comenzar?</h2>
+            <p>Para iniciar el curso, simplemente haz clic en cualquiera de los módulos listados arriba. Te recomendamos seguir el orden secuencial para una mejor comprensión del contenido.</p>
+            <button id="start-course">Comenzar el Curso</button>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>Curso e-Learning: Método TEACCH - Para psicólogos educativos en formación</p>
+    </footer>
+
+    <!-- JavaScript para funcionalidades básicas -->
+    <script>
+        // Función para iniciar el curso desde el primer módulo
+        document.getElementById('start-course').addEventListener('click', function() {
+            // Redirigir al primer módulo
+            window.location.href = 'modulo1.html';
+        });
+
+        // Función para mostrar un mensaje de bienvenida al cargar la página
+        window.addEventListener('load', function() {
+            console.log('Página de inicio del curso TEACCH cargada correctamente');
+            // Aquí podríamos agregar más funcionalidades como:
+            // - Verificar el progreso del usuario si está guardado
+            // - Mostrar recordatorios o notificaciones
+        });
+
+        // Función para manejar la navegación entre módulos (para futura implementación)
+        function navigateToModule(moduleNumber) {
+            // Esta función podría usarse para llevar un registro del progreso
+            // o para realizar acciones específicas antes de cambiar de módulo
+            console.log('Navegando al módulo ' + moduleNumber);
+            // window.location.href = 'modulo' + moduleNumber + '.html';
+        }
+
+        // Ejemplo de cómo podríamos agregar interactividad a los enlaces de módulos
+        document.querySelectorAll('.module-link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Podríamos agregar aquí lógica para:
+                // - Guardar el progreso
+                // - Mostrar un mensaje de confirmación
+                // - Realizar seguimiento de qué módulos se han visitado
+                console.log('Accediendo al módulo: ' + this.textContent);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método TEACCH – Módulos</title>
+
+    <style>
+        /* --- ESTILOS TEMPORALES (solo para distinguir visualmente) --- */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        
+        header {
+            background: #0d6efd;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        nav {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            justify-content: center;
+            background: #e6e6e6;
+        }
+        
+        nav button {
+            padding: 8px 14px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        section {
+            display: none;
+            padding: 20px;
+        }
+        
+        section.active {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Método TEACCH</h1>
+    </header>
+
+    <nav>
+        <button onclick="mostrarModulo(1)">Módulo 1</button>
+        <button onclick="mostrarModulo(2)">Módulo 2</button>
+        <button onclick="mostrarModulo(3)">Módulo 3</button>
+        <button onclick="mostrarModulo(4)">Módulo 4</button>
+        <button onclick="mostrarModulo(5)">Módulo 5</button>
+        <button onclick="mostrarModulo(6)">Módulo 6</button>
+    </nav>
+
+    <!-- ================== SECCIONES DEL CONTENIDO ================== -->
+
+    <section id="mod1" class="active">
+        <h2>Módulo 1: ¿Qué es el método TEACCH?</h2>
+        <p>Aquí iría el contenido del módulo 1…</p>
+    </section>
+
+    <section id="mod2">
+        <h2>Módulo 2: Beneficios del TEACCH</h2>
+        <p>Contenido...</p>
+    </section>
+
+    <section id="mod3">
+        <h2>Módulo 3: Enseñanza estructurada</h2>
+        <p>Contenido...</p>
+    </section>
+
+    <section id="mod4">
+        <h2>Módulo 4: Estructura física y sistema de trabajo</h2>
+        <p>Contenido...</p>
+    </section>
+
+    <section id="mod5">
+        <h2>Módulo 5: Horarios y organización del entorno</h2>
+        <p>Contenido...</p>
+    </section>
+
+    <section id="mod6">
+        <h2>Módulo 6: Aplicación profesional</h2>
+        <p>Contenido...</p>
+    </section>
+
+
+    <!-- ================== JAVASCRIPT ================== -->
+
+    <script>
+        function mostrarModulo(num) {
+            const modulos = document.querySelectorAll("section");
+            modulos.forEach(m => m.classList.remove("active")); // Ocultar todos
+            document.getElementById("mod" + num).classList.add("active"); // Mostrar seleccionado
+        }
+    </script>
+
+</body>
+
+</html>

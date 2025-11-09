@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Enseñanza estructurada | Curso TEACCH</title>
+    <style>
+        /* CSS básico temporal */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .module-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        button:hover:not(:disabled) {
+            background: #3a5a80;
+        }
+        
+        .content-section {
+            margin: 40px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
+        }
+        
+        .quiz {
+            background: #f0f8f0;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .puzzle-activity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .puzzle-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .puzzle-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px dashed #ccc;
+            cursor: move;
+            text-align: center;
+        }
+        
+        .puzzle-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .puzzle-targets {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .puzzle-target {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            min-height: 60px;
+            border: 2px solid #ddd;
+        }
+        
+        .quiz-question {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            color: #4a6fa5;
+            margin: 20px 0 10px 0;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .component-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="module-container">
+        <!-- Encabezado del módulo -->
+        <header class="module-header">
+            <h1>Módulo 3: Enseñanza estructurada: el corazón del TEACCH</h1>
+            <p><strong>Duración:</strong> 15 minutos</p>
+            <div class="objectives">
+                <h3>Objetivos de aprendizaje:</h3>
+                <ul>
+                    <li>Comprender los fundamentos de la enseñanza estructurada</li>
+                    <li>Identificar los componentes visuales y espaciales del método</li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Navegación entre módulos -->
+        <div class="nav-buttons">
+            <button id="prev-module">← Módulo Anterior</button>
+            <button id="home-button">Inicio</button>
+            <button id="next-module">Siguiente Módulo →</button>
+        </div>
+
+        <!-- Contenido teórico -->
+        <section class="content-section" id="theoretical-content">
+            <h2>Contenido Teórico</h2>
+
+            <div id="content-text">
+                <h3>Fundamentos de la Enseñanza Estructurada</h3>
+                <p>La Enseñanza Estructurada surgió como adaptación educativa a las formas de entender, pensar y aprender de las personas con TEA. Está diseñada específicamente para las diferencias neurológicas en el autismo.</p>
+
+                <h3>Estructura para reducir ansiedad</h3>
+                <p>Esta metodología organiza el aula haciendo los procesos más "amigables" para personas con TEA. Las expectativas se vuelven concretas y claras, reduciendo significativamente la ansiedad.</p>
+
+                <p><strong>Objetivos principales:</strong></p>
+                <ul>
+                    <li>Ayudar a entender situaciones y expectativas</li>
+                    <li>Mantener un estado de calma</li>
+                    <li>Facilitar aprendizaje usando el canal visual</li>
+                    <li>Promover independencia</li>
+                    <li>Reducir problemas de conducta</li>
+                </ul>
+
+                <h3>Aprendizaje visual como vía principal</h3>
+                <p>Las personas con TEA suelen tener habilidades visuales más desarrolladas que las auditivas. La Enseñanza Estructurada aprovecha este punto fuerte presentando información visualmente, dando más significado a las actividades y permitiendo
+                    mayor independencia.</p>
+
+                <h3>Los cuatro componentes clave</h3>
+
+                <div class="component-grid">
+                    <div class="component-card">
+                        <h4>1. Estructura física del entorno</h4>
+                        <p>La organización del espacio hace el aula más comprensible y manejable.</p>
+                        <p><strong>Principios esenciales:</strong></p>
+                        <ul>
+                            <li>Límites físicos/visuales claros</li>
+                            <li>Minimizar distracciones</li>
+                            <li>Áreas específicas para actividades</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>2. Agendas u horarios</h4>
+                        <p>Proporcionan claridad y predictibilidad mediante rutinas visuales individualizadas.</p>
+                        <p><strong>Formatos según nivel:</strong></p>
+                        <ul>
+                            <li>Objetos</li>
+                            <li>Fotos/dibujos</li>
+                            <li>Listas escritas</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>3. Sistemas de trabajo</h4>
+                        <p>Permiten trabajar sin supervisión directa respondiendo a:</p>
+                        <ul>
+                            <li>¿Qué trabajo hacer?</li>
+                            <li>¿Cuánto trabajo?</li>
+                            <li>¿Cuándo termina?</li>
+                            <li>¿Qué sigue después?</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <h4>4. Información visual</h4>
+                        <p>Organiza tareas visualmente para mayor claridad y menos ansiedad.</p>
+                        <p><strong>Componentes:</strong></p>
+                        <ul>
+                            <li>Claridad visual</li>
+                            <li>Organización visual</li>
+                            <li>Instrucciones visuales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Beneficios</h3>
+                <p>Los alumnos que usan estas estrategias están más tranquilos, seguros y pueden trabajar productivamente por más tiempo. La estructura predecible ayuda a concentrarse en lo esencial.</p>
+
+                <blockquote style="background: #f8f9fa; padding: 15px; border-left: 4px solid #4a6fa5; margin: 20px 0;">
+                    <em>"La enseñanza estructurada es el corazón del método TEACCH. Cada componente tiene un propósito: organizar el entorno, anticipar actividades y favorecer la independencia del alumno."</em>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Actividad interactiva: Rompecabezas de componentes -->
+        <section class="content-section activity" id="interactive-activity">
+            <h2>Actividad Interactiva: Relaciona los Componentes</h2>
+            <p>Arrastra cada componente de la enseñanza estructurada a su descripción correcta:</p>
+
+            <div class="puzzle-activity">
+                <div class="puzzle-items">
+                    <div class="puzzle-item" data-component="estructura-fisica">Estructura física del entorno</div>
+                    <div class="puzzle-item" data-component="agendas">Agendas u horarios</div>
+                    <div class="puzzle-item" data-component="sistemas-trabajo">Sistemas de trabajo</div>
+                    <div class="puzzle-item" data-component="informacion-visual">Información visual</div>
+                </div>
+
+                <div class="puzzle-targets">
+                    <div class="puzzle-target" data-component="agendas">
+                        <p>Proporcionan claridad y predictibilidad mediante rutinas visuales individualizadas</p>
+                    </div>
+                    <div class="puzzle-target" data-component="sistemas-trabajo">
+                        <p>Permiten trabajar sin supervisión directa respondiendo a las 4 preguntas clave</p>
+                    </div>
+                    <div class="puzzle-target" data-component="informacion-visual">
+                        <p>Organiza tareas visualmente para mayor claridad y menos ansiedad</p>
+                    </div>
+                    <div class="puzzle-target" data-component="estructura-fisica">
+                        <p>Organización del espacio que hace el aula más comprensible y manejable</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="check-puzzle" style="align-self: flex-start;">Verificar respuestas</button>
+            <div id="puzzle-feedback" class="feedback"></div>
+        </section>
+
+        <!-- Evaluación: Mini quiz -->
+        <section class="content-section quiz" id="evaluation">
+            <h2>Evaluación: Conocimientos del Módulo 3</h2>
+
+            <div id="quiz-container">
+                <div class="quiz-question">
+                    <p><strong>1. ¿Cuál es el objetivo principal de la enseñanza estructurada en TEACCH?</strong></p>
+                    <input type="radio" name="q1" value="a"> a) Eliminar completamente el autismo<br>
+                    <input type="radio" name="q1" value="b"> b) Incrementar independencia y reducir ansiedad<br>
+                    <input type="radio" name="q1" value="c"> c) Enseñar únicamente habilidades académicas<br>
+                    <div id="feedback-q1" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>2. ¿Por qué se enfatiza el aprendizaje visual en TEACCH?</strong></p>
+                    <input type="radio" name="q2" value="a"> a) Porque es más barato que otros métodos<br>
+                    <input type="radio" name="q2" value="b"> b) Porque las personas con TEA suelen tener habilidades visuales más desarrolladas<br>
+                    <input type="radio" name="q2" value="c"> c) Porque los profesores prefieren métodos visuales<br>
+                    <div id="feedback-q2" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>3. ¿Cuál de estos NO es uno de los cuatro componentes clave de la enseñanza estructurada?</strong></p>
+                    <input type="radio" name="q3" value="a"> a) Estructura física del entorno<br>
+                    <input type="radio" name="q3" value="b"> b) Terapia del habla intensiva<br>
+                    <input type="radio" name="q3" value="c"> c) Sistemas de trabajo<br>
+                    <div id="feedback-q3" class="feedback"></div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>4. ¿Qué preguntas responde un sistema de trabajo?</strong></p>
+                    <input type="radio" name="q4" value="a"> a) Solo "¿Qué hago?"<br>
+                    <input type="radio" name="q4" value="b"> b) Las 4 preguntas: Qué, Cuánto, Cuándo termino, Qué sigue<br>
+                    <input type="radio" name="q4" value="c"> c) Solo preguntas sobre el contenido académico<br>
+                    <div id="feedback-q4" class="feedback"></div>
+                </div>
+
+                <button id="submit-quiz">Enviar respuestas</button>
+                <div id="quiz-result" class="feedback" style="margin-top: 20px;"></div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section class="content-section" id="resources">
+            <h2>Recursos del Módulo</h2>
+            <div id="resources-container">
+                <p><strong>Recursos multimedia sugeridos:</strong></p>
+                <ul>
+                    <li>Animación explicativa de los cuatro componentes</li>
+                    <li>Actividad interactiva tipo matching</li>
+                    <li>Documento PDF: "Guía de enseñanza estructurada"</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navegación inferior -->
+        <div class="nav-buttons">
+            <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button id="home-button-bottom">Inicio</button>
+            <button id="next-module-bottom">Siguiente Módulo →</button>
+        </div>
+    </div>
+
+    <script>
+        // DATOS COMUNES PARA TODOS LOS MÓDULOS
+        const courseModules = {
+            module1: {
+                title: "Módulo 1: ¿Qué es el método TEACCH y sus objetivos?",
+                duration: "15 minutos",
+                file: "modulo1.html",
+                next: "module2",
+                prev: null
+            },
+            module2: {
+                title: "Módulo 2: Beneficios del método TEACCH",
+                duration: "10 minutos",
+                file: "modulo2.html",
+                next: "module3",
+                prev: "module1"
+            },
+            module3: {
+                title: "Módulo 3: Enseñanza estructurada: el corazón del TEACCH",
+                duration: "15 minutos",
+                file: "modulo3.html",
+                next: "module4",
+                prev: "module2"
+            },
+            module4: {
+                title: "Módulo 4: Estructura física y sistema de trabajo",
+                duration: "15 minutos",
+                file: "modulo4.html",
+                next: "module5",
+                prev: "module3"
+            },
+            module5: {
+                title: "Módulo 5: Horarios y organización del entorno",
+                duration: "15 minutos",
+                file: "modulo5.html",
+                next: "module6",
+                prev: "module4"
+            },
+            module6: {
+                title: "Módulo 6: Aplicar e integrar el método TEACCH",
+                duration: "20 minutos",
+                file: "modulo6.html",
+                next: null,
+                prev: "module5"
+            }
+        };
+
+        // DETECTAR MÓDULO ACTUAL
+        function getCurrentModule() {
+            return 'module3'; // Este es el módulo 3
+        }
+
+        // CONFIGURAR NAVEGACIÓN
+        function setupNavigation() {
+            const currentModule = getCurrentModule();
+            const module = courseModules[currentModule];
+
+            // Configurar botones de navegación
+            const prevButtons = document.querySelectorAll('#prev-module, #prev-module-bottom');
+            const nextButtons = document.querySelectorAll('#next-module, #next-module-bottom');
+            const homeButtons = document.querySelectorAll('#home-button, #home-button-bottom');
+
+            // Botón anterior
+            prevButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = courseModules[module.prev].file;
+            });
+
+            // Botón siguiente
+            nextButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = courseModules[module.next].file;
+            });
+
+            // Botón inicio
+            homeButtons.forEach(btn => {
+                btn.onclick = () => window.location.href = 'index.html';
+            });
+        }
+
+        // ACTIVIDAD DE ROMPECABEZAS - VERSIÓN CORREGIDA
+        function setupPuzzleActivity() {
+            const items = document.querySelectorAll('.puzzle-item');
+            const targets = document.querySelectorAll('.puzzle-target');
+            const checkButton = document.getElementById('check-puzzle');
+            const feedback = document.getElementById('puzzle-feedback');
+
+            let draggedItem = null;
+
+            // Configurar drag and drop
+            items.forEach(item => {
+                item.setAttribute('draggable', 'true');
+
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    setTimeout(() => this.style.display = 'none', 0);
+                });
+
+                item.addEventListener('dragend', function() {
+                    setTimeout(() => {
+                        draggedItem = null;
+                    }, 0);
+                });
+            });
+
+            targets.forEach(target => {
+                target.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                target.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (draggedItem) {
+                        // Si ya hay un elemento en este target, lo removemos primero
+                        const existingItem = this.querySelector('.puzzle-item');
+                        if (existingItem) {
+                            existingItem.remove();
+                        }
+
+                        // Agregar el elemento arrastrado directamente (sin clonar)
+                        draggedItem.style.display = 'block';
+                        draggedItem.style.margin = '10px 0';
+                        draggedItem.style.cursor = 'default';
+                        this.appendChild(draggedItem);
+
+                        draggedItem = null;
+                    }
+                });
+            });
+
+            // Verificar respuestas correctas
+            checkButton.addEventListener('click', function() {
+                let correctCount = 0;
+                const totalTargets = targets.length;
+
+                targets.forEach(target => {
+                    const item = target.querySelector('.puzzle-item');
+                    if (item && item.getAttribute('data-component') === target.getAttribute('data-component')) {
+                        correctCount++;
+                    }
+                });
+
+                if (correctCount === totalTargets) {
+                    feedback.textContent = '¡Correcto! Has relacionado todos los componentes con sus descripciones adecuadas.';
+                    feedback.className = 'feedback correct';
+                    feedback.style.display = 'block';
+                } else {
+                    feedback.textContent = `Tienes ${correctCount} de ${totalTargets} correctos. Revisa las relaciones e inténtalo nuevamente.`;
+                    feedback.className = 'feedback incorrect';
+                    feedback.style.display = 'block';
+                }
+            });
+        }
+
+        // EVALUACIÓN QUIZ
+        function setupQuiz() {
+            const submitButton = document.getElementById('submit-quiz');
+            const quizResult = document.getElementById('quiz-result');
+
+            submitButton.addEventListener('click', function() {
+                // Respuestas correctas
+                const correctAnswers = {
+                    q1: 'b',
+                    q2: 'b',
+                    q3: 'b',
+                    q4: 'b'
+                };
+
+                let score = 0;
+                const totalQuestions = Object.keys(correctAnswers).length;
+
+                // Verificar cada pregunta
+                Object.keys(correctAnswers).forEach(question => {
+                    const selected = document.querySelector(`input[name="${question}"]:checked`);
+                    const feedback = document.getElementById(`feedback-${question}`);
+
+                    if (selected) {
+                        if (selected.value === correctAnswers[question]) {
+                            score++;
+                            feedback.textContent = '✓ Respuesta correcta';
+                            feedback.className = 'feedback correct';
+                        } else {
+                            feedback.textContent = '✗ Respuesta incorrecta';
+                            feedback.className = 'feedback incorrect';
+                        }
+                    } else {
+                        feedback.textContent = 'Por favor selecciona una respuesta';
+                        feedback.className = 'feedback incorrect';
+                    }
+                    feedback.style.display = 'block';
+                });
+
+                // Mostrar resultado general
+                quizResult.textContent = `Obtuviste ${score} de ${totalQuestions} respuestas correctas.`;
+                quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
+                quizResult.style.display = 'block';
+
+                if (score === totalQuestions) {
+                    quizResult.textContent += ' ¡Excelente! Has comprendido los conceptos clave de la enseñanza estructurada.';
+                } else if (score >= 3) {
+                    quizResult.textContent += ' Buen trabajo, pero revisa los conceptos que no acertaste.';
+                } else {
+                    quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
+                }
+            });
+        }
+
+        // INICIALIZAR AL CARGAR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            setupPuzzleActivity();
+            setupQuiz();
+            console.log('Módulo 3 cargado correctamente');
+        });
+    </script>
+</body>
+
+</html>
