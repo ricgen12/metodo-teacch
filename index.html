@@ -75,6 +75,69 @@
             color: white;
             margin-top: 2rem;
         }
+        
+        button {
+            padding: 12px 24px;
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        button:hover:not(:disabled) {
+            background: #3a5a80;
+        }
+        /* ===== CAMBIO: botón "Comenzar el Curso" más visible ===== */
+        
+        #start-course {
+            padding: 14px 32px;
+            font-size: 18px;
+            background: #3f5f94;
+            /* tono afín pero más intenso */
+            box-shadow: 0 8px 20px rgba(63, 95, 148, 0.22);
+            border-radius: 8px;
+            transition: transform .12s ease, box-shadow .12s ease, background .12s;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        #start-course:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(63, 95, 148, 0.28);
+            background: #34507a;
+        }
+        /* Ajuste opcional: ancho mínimo para mejor presencia en móviles */
+        
+        #start-course {
+            min-width: 220px;
+            display: block;
+            margin: 0 auto;
+        }
+        /* Animación opcional: quita la clase "pulse" del botón si no la quieres */
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 18px rgba(63, 95, 148, 0.18);
+            }
+            70% {
+                box-shadow: 0 16px 34px rgba(63, 95, 148, 0.26);
+            }
+            100% {
+                box-shadow: 0 8px 18px rgba(63, 95, 148, 0.18);
+            }
+        }
+        
+        #start-course.pulse {
+            animation: pulse 3s infinite;
+        }
     </style>
 </head>
 
@@ -147,7 +210,10 @@
         <section id="start-instructions">
             <h2>¿Cómo comenzar?</h2>
             <p>Para iniciar el curso, simplemente haz clic en cualquiera de los módulos listados arriba. Te recomendamos seguir el orden secuencial para una mejor comprensión del contenido.</p>
-            <button id="start-course">Comenzar el Curso</button>
+            <!-- button id="start-course">Comenzar el Curso</button -->
+
+            <button id="start-course" aria-label="Comenzar el curso">Comenzar el Curso</button>
+            <br>
         </section>
     </main>
 

@@ -147,6 +147,25 @@
         li {
             margin: 8px 0;
         }
+        
+        .video-wrapper {
+            max-width: 720px;
+            /* ancho máximo deseado */
+            width: 100%;
+            /* se adapta en pantallas pequeñas */
+            margin: 0 auto;
+            /* centra horizontalmente */
+            aspect-ratio: 16/9;
+            /* mantiene proporción 16:9 */
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
     </style>
 </head>
 
@@ -207,6 +226,13 @@
                 <blockquote style="background: #f8f9fa; padding: 15px; border-left: 4px solid #4a6fa5; margin: 20px 0;">
                     <em>"El método TEACCH nació en Carolina del Norte como un modelo pionero de intervención para personas con autismo. Su objetivo principal es promover la autonomía, la comprensión y la participación social mediante entornos estructurados y colaborativos."</em>
                 </blockquote>
+
+                <h3>Recursos del Módulo</h3>
+                <p>Para profundizar en el contenido teórico, se recomienda revisar los siguientes recursos multimedia:</p>
+                <!-- MOVIDO: iframe dentro de un contenedor responsivo -->
+                <div class="video-wrapper" aria-hidden="false">
+                    <iframe src="https://www.youtube.com/embed/GZHYQ9bp8rM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
 
@@ -217,10 +243,10 @@
 
             <div class="timeline-activity">
                 <div id="timeline-items">
-                    <div class="timeline-item" data-year="1966">Inicio del proyecto TEACCH en Carolina del Norte</div>
                     <div class="timeline-item" data-year="1972">Reconocimiento estatal como programa oficial</div>
-                    <div class="timeline-item" data-year="1980">Expansión internacional del modelo</div>
+                    <div class="timeline-item" data-year="1966">Inicio del proyecto TEACCH en Carolina del Norte</div>
                     <div class="timeline-item" data-year="1990">Consolidación del enfoque estructurado</div>
+                    <div class="timeline-item" data-year="1980">Expansión internacional del modelo</div>
                 </div>
 
                 <div class="timeline-container" id="timeline-target">
@@ -267,7 +293,7 @@
         </section>
 
         <!-- Recursos -->
-        <section class="content-section" id="resources">
+        <!-- <section class="content-section" id="resources">
             <h2>Recursos del Módulo</h2>
             <div id="resources-container">
                 <p><strong>Recursos multimedia sugeridos:</strong></p>
@@ -277,7 +303,7 @@
                     <li>Documento PDF: "Principios fundamentales del TEACCH"</li>
                 </ul>
             </div>
-        </section>
+        </section> -->
 
         <!-- Navegación inferior -->
         <div class="nav-buttons">
