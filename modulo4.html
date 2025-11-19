@@ -183,6 +183,49 @@
             border-radius: 8px;
             border-left: 4px solid #4a6fa5;
         }
+        /* reemplazo: contenedor responsivo para el video */
+        
+        .video-wrapper {
+            max-width: 720px;
+            /* ancho máximo deseado */
+            width: 100%;
+            /* se adapta en pantallas pequeñas */
+            margin: 0 auto;
+            /* centra horizontalmente */
+            aspect-ratio: 16/9;
+            /* mantiene proporción 16:9 */
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+        /* Nuevos estilos para los botones de actividad */
+        
+        .activity-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #reset-activity {
+            background: #4a6fa5;
+        }
+        
+        #reset-activity:hover:not(:disabled) {
+            background: #3a5a80;
+        }
+        /* #show-errors {
+            background: #cccccc;
+        } */
+        
+        #show-errors:hover:not(:disabled) {
+            background: #3a5a80;
+        }
     </style>
 </head>
 
@@ -264,6 +307,13 @@
                 <blockquote style="background: #f8f9fa; padding: 15px; border-left: 4px solid #4a6fa5; margin: 20px 0;">
                     <em>"Un aula estructurada es clave para el éxito del método TEACCH. Cada zona tiene una función clara, ayudando al estudiante a anticipar y comprender las actividades del día."</em>
                 </blockquote>
+
+                <h3>Recursos del Módulo</h3>
+                <p>Para profundizar en el contenido teórico, se recomienda revisar los siguientes recursos multimedia:</p>
+                <!-- MOVIDO: iframe dentro de un contenedor responsivo -->
+                <div class="video-wrapper" aria-hidden="false">
+                    <iframe src="https://www.youtube.com/embed/GZHYQ9bp8rM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
 
@@ -279,7 +329,7 @@
                     <div class="classroom-item" data-zone="grupo">Alfombra grande para actividades grupales</div>
                     <div class="classroom-item" data-zone="transicion">Panel de horarios visuales</div>
                     <div class="classroom-item" data-zone="ocio">Estante con juegos y materiales de ocio</div>
-                    <div class="classroom-item" data-zone="descanso">Sillón cómodo y cojines</div>
+                    <!--div class="classroom-item" data-zone="descanso">Sillón cómodo y cojines</div -->
                 </div>
 
                 <div class="classroom-layout">
@@ -292,13 +342,20 @@
                     <div class="classroom-zone" data-zone="grupo">
                         <div class="zone-label">Actividades de Grupo</div>
                     </div>
+                    <div class="classroom-zone" data-zone="transicion">
+                        <div class="zone-label">Transición</div>
+                    </div>
                     <div class="classroom-zone" data-zone="ocio">
                         <div class="zone-label">Juego/Ocio</div>
                     </div>
                 </div>
             </div>
 
-            <button id="check-classroom" style="align-self: flex-start;">Verificar organización</button>
+            <div class="activity-buttons">
+                <button id="check-classroom">Verificar organización</button>
+                <button id="reset-activity">Reiniciar actividad</button>
+                <button id="show-errors" disabled>Regresar elementos erróneos</button>
+            </div>
             <div id="classroom-feedback" class="feedback"></div>
         </section>
 
@@ -345,7 +402,7 @@
         </section>
 
         <!-- Recursos -->
-        <section class="content-section" id="resources">
+        <!-- <section class="content-section" id="resources">
             <h2>Recursos del Módulo</h2>
             <div id="resources-container">
                 <p><strong>Recursos multimedia sugeridos:</strong></p>
@@ -355,7 +412,7 @@
                     <li>Video demostrativo de sistemas de trabajo</li>
                 </ul>
             </div>
-        </section>
+        </section> -->
 
         <!-- Navegación inferior -->
         <div class="nav-buttons">
@@ -448,7 +505,95 @@
             const items = document.querySelectorAll('.classroom-item');
             const zones = document.querySelectorAll('.classroom-zone');
             const checkButton = document.getElementById('check-classroom');
+            const resetButton = document.getElementById('reset-activity');
+            const showErrorsButton = document.getElementById('show-errors');
             const feedback = document.getElementById('classroom-feedback');
+
+            // Variables para almacenar el estado inicial y los errores
+            let initialItemsState = [];
+            let incorrectItems = [];
+
+            // Guardar estado inicial de los elementos
+            function saveInitialState() {
+                initialItemsState = [];
+                items.forEach(item => {
+                    initialItemsState.push({
+                        element: item,
+                        parent: item.parentElement,
+                        dataZone: item.getAttribute('data-zone')
+                    });
+                });
+            }
+
+            // Restaurar estado inicial
+            function resetToInitialState() {
+                // Limpiar todas las zonas
+                zones.forEach(zone => {
+                    const existingItems = zone.querySelectorAll('.classroom-item');
+                    existingItems.forEach(item => zone.removeChild(item));
+                });
+
+                // Restaurar elementos a su posición original
+                initialItemsState.forEach(itemState => {
+                    itemState.parent.appendChild(itemState.element);
+                    itemState.element.style.borderColor = '#ccc';
+                    itemState.element.style.background = 'white';
+                    itemState.element.style.cursor = 'move';
+                });
+
+                // Limpiar feedback
+                feedback.style.display = 'none';
+                feedback.textContent = '';
+
+                // Deshabilitar botón de mostrar errores
+                showErrorsButton.disabled = true;
+            }
+
+            // Mostrar solo los elementos con errores
+            // function showIncorrectItems() {
+            //     // Primero restaurar todo
+            //     resetToInitialState();
+
+            //     // Luego marcar solo los elementos incorrectos
+            //     incorrectItems.forEach(item => {
+            //         item.style.borderColor = '#e74c3c';
+            //         item.style.background = '#f8d7da';
+            //     });
+
+            //     feedback.textContent = 'Se han resaltado los elementos que necesitan corrección.';
+            //     feedback.className = 'feedback incorrect';
+            //     feedback.style.display = 'block';
+            // }
+
+            // Mostrar solo los elementos con errores (versión que devuelve solo los incorrectos)
+            function showIncorrectItems() {
+                if (!incorrectItems || incorrectItems.length === 0) {
+                    feedback.textContent = 'No hay elementos incorrectos para regresar.';
+                    feedback.className = 'feedback';
+                    feedback.style.display = 'block';
+                    return;
+                }
+
+                // Para cada elemento incorrecto, buscar su estado inicial y moverlo de regreso
+                incorrectItems.forEach(item => {
+                    // Encontrar el estado inicial guardado (initialItemsState fue creado en saveInitialState)
+                    const state = initialItemsState.find(s => s.element === item);
+                    if (state && state.parent) {
+                        state.parent.appendChild(item);
+                    }
+                    // Restaurar estilos visuales
+                    item.style.borderColor = '#ccc';
+                    item.style.background = 'white';
+                    item.style.cursor = 'move';
+                    item.style.margin = '0';
+                });
+
+                // Mensaje y deshabilitar botón después de usarlo
+                feedback.textContent = 'Se han regresado los elementos erróneos a su posición original.';
+                feedback.className = 'feedback';
+                feedback.style.display = 'block';
+                showErrorsButton.disabled = true;
+            }
 
             let draggedItem = null;
 
@@ -463,6 +608,7 @@
 
                 item.addEventListener('dragend', function() {
                     setTimeout(() => {
+                        this.style.display = 'block';
                         draggedItem = null;
                     }, 0);
                 });
@@ -497,6 +643,7 @@
             checkButton.addEventListener('click', function() {
                 let correctCount = 0;
                 const totalItems = items.length;
+                incorrectItems = []; // Reiniciar lista de errores
 
                 items.forEach(item => {
                     const correctZone = item.getAttribute('data-zone');
@@ -507,6 +654,7 @@
                         item.style.borderColor = '#2ecc71';
                         item.style.background = '#d4edda';
                     } else {
+                        incorrectItems.push(item);
                         item.style.borderColor = '#e74c3c';
                         item.style.background = '#f8d7da';
                     }
@@ -516,12 +664,23 @@
                     feedback.textContent = '¡Excelente! Has organizado perfectamente el aula TEACCH según los principios de estructuración física.';
                     feedback.className = 'feedback correct';
                     feedback.style.display = 'block';
+                    showErrorsButton.disabled = true; // No hay errores que mostrar
                 } else {
                     feedback.textContent = `Tienes ${correctCount} de ${totalItems} elementos correctos. Los elementos en verde están bien ubicados, los rojos necesitan ajustes.`;
                     feedback.className = 'feedback incorrect';
                     feedback.style.display = 'block';
+                    showErrorsButton.disabled = false; // Habilitar botón de mostrar errores
                 }
             });
+
+            // Configurar botón de reinicio
+            resetButton.addEventListener('click', resetToInitialState);
+
+            // Configurar botón de mostrar errores
+            showErrorsButton.addEventListener('click', showIncorrectItems);
+
+            // Guardar estado inicial al cargar la página
+            saveInitialState();
         }
 
         // EVALUACIÓN QUIZ
