@@ -210,6 +210,49 @@
             gap: 10px;
             margin-top: 15px;
         }
+        /* NUEVO ESTILO PARA EL RECURSO PDF */
+        
+        .pdf-resource {
+            max-width: 720px;
+            width: 100%;
+            margin: 20px auto 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6fa5;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pdf-resource h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .pdf-resource p {
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        
+        .pdf-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a6fa5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .pdf-link:hover {
+            background: #3a5a80;
+        }
+        
+        .pdf-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -279,6 +322,15 @@
                 <div class="video-wrapper" aria-hidden="false">
                     <iframe src="https://www.youtube.com/embed/GZHYQ9bp8rM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
+
+                <!-- NUEVO: RECURSO PDF -->
+                <div class="pdf-resource">
+                    <h4>📚 Material Complementario</h4>
+                    <p>Descarga el siguiente documento PDF para profundizar en los beneficios del método TEACCH:</p>
+                    <a href="https://drive.google.com/file/d/1TD3NM92FqWH4JsxCXEkXIsMpEo6dTGY_/view?usp=sharing" target="_blank" class="pdf-link">
+                        <span class="pdf-icon">📄</span> Descargar PDF: Beneficios del Método TEACCH
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -308,33 +360,34 @@
 
                 <!-- Situaciones para arrastrar -->
                 <div class="draggable-items">
-                    <div class="draggable-item" data-correct="after" data-pair="1">
+                    <div class="draggable-item" data-correct="before" data-pair="1">
                         Crisis constantes por cambios inesperados
                     </div>
-                    <div class="draggable-item" data-correct="before" data-pair="1">
+                    <div class="draggable-item" data-correct="after" data-pair="1">
                         Rutinas visuales que anticipan cambios
                     </div>
 
-                    <div class="draggable-item" data-correct="after" data-pair="2">
+                    <div class="draggable-item" data-correct="before" data-pair="2">
                         Dependencia total para actividades básicas
                     </div>
-                    <div class="draggable-item" data-correct="before" data-pair="2">
+                    <div class="draggable-item" data-correct="after" data-pair="2">
                         Sistema de trabajo independiente claro
                     </div>
 
-                    <div class="draggable-item" data-correct="after" data-pair="3">
+                    <div class="draggable-item" data-correct="before" data-pair="3">
                         Falta de comunicación efectiva
                     </div>
-                    <div class="draggable-item" data-correct="before" data-pair="3">
+                    <div class="draggable-item" data-correct="after" data-pair="4">
+                        Armonía familiar con rutinas establecidas
+                    </div>
+
+                    <div class="draggable-item" data-correct="before" data-pair="4">
+                        Estrés familiar por falta de estructura
+                    </div>
+                    <div class="draggable-item" data-correct="after" data-pair="3">
                         Sistema de comunicación visual entendido por todos
                     </div>
 
-                    <div class="draggable-item" data-correct="after" data-pair="4">
-                        Estrés familiar por falta de estructura
-                    </div>
-                    <div class="draggable-item" data-correct="before" data-pair="4">
-                        Armonía familiar con rutinas establecidas
-                    </div>
                 </div>
 
                 <div class="activity-buttons">
@@ -383,14 +436,6 @@
                 <div id="quiz-result" class="feedback" style="margin-top: 20px;"></div>
             </div>
         </section>
-
-        <!-- Recursos -->
-        <!-- <section class="content-section" id="resources">
-            <h2>Recursos del Módulo</h2>
-            <div id="resources-container">
-                Recursos multimedia
-            </div>
-        </section> -->
 
         <!-- Navegación inferior -->
         <div class="nav-buttons">
