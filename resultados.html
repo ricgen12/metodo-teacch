@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Curso | Método TEACCH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certificate {
+            border: 2px solid #4a6fa5;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .certificate h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .certificate p {
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .module-progress {
+            margin: 20px 0;
+        }
+        
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .progress-complete {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        
+        .progress-incomplete {
+            color: #e74c3c;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background: #3a5a80;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .results-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+            button {
+                display: none;
+            }
+            .certificate {
+                border: 3px solid #4a6fa5;
+                page-break-inside: avoid;
+            }
+        }
+        
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="results-container">
+        <h1>Resultados del Curso TEACCH</h1>
+
+        <div id="progress-summary">
+            <h2>Tu Progreso</h2>
+            <div id="progress-stats"></div>
+        </div>
+
+        <div class="module-progress">
+            <h3>Detalle por Módulos</h3>
+            <div id="module-details"></div>
+        </div>
+
+        <div class="certificate" id="certificate">
+            <h2>CERTIFICADO DE COMPLETACIÓN</h2>
+            <p>Otorgado a:</p>
+            <h3 id="student-name">[Nombre del Estudiante]</h3>
+            <p>Por haber completado satisfactoriamente el curso:</p>
+            <h4>"Método TEACCH para Psicólogos Educativos"</h4>
+            <p>Duración: 90 minutos | Módulos completados: <span id="completed-modules">0</span>/6</p>
+            <p>Fecha de finalización: <span id="completion-date">[Fecha]</span></p>
+            <p><em>Curso e-Learning - Método TEACCH</em></p>
+        </div>
+
+        <div style="text-align: center;">
+            <button onclick="window.print()">Imprimir Certificado</button>
+            <button onclick="window.location.href='index.html'">Volver al Inicio</button>
+            <button onclick="resetProgress()">Reiniciar Progreso</button>
+        </div>
+    </div>
+
+    <script>
+        // Obtener progreso guardado
+        const progress = JSON.parse(localStorage.getItem('teacchProgress')) || {};
+        const studentName = localStorage.getItem('teacchStudentName') || 'Estudiante';
+
+        // Calcular estadísticas
+        let completedCount = 0;
+        let totalScore = 0;
+        let totalPossible = 0;
+
+        // Configurar módulos del curso
+        const courseModules = {
+            module1: {
+                title: "Módulo 1: ¿Qué es el método TEACCH y sus objetivos?",
+                duration: "15 minutos"
+            },
+            module2: {
+                title: "Módulo 2: Beneficios del método TEACCH",
+                duration: "10 minutos"
+            },
+            module3: {
+                title: "Módulo 3: Enseñanza estructurada",
+                duration: "15 minutos"
+            },
+            module4: {
+                title: "Módulo 4: Estructura física y sistema de trabajo",
+                duration: "15 minutos"
+            },
+            module5: {
+                title: "Módulo 5: Horarios y organización del entorno",
+                duration: "15 minutos"
+            },
+            module6: {
+                title: "Módulo 6: Aplicar e integrar el método TEACCH",
+                duration: "20 minutos"
+            }
+        };
+
+        // Actualizar detalles de módulos
+        const moduleDetails = document.getElementById('module-details');
+        Object.keys(courseModules).forEach(moduleKey => {
+                    const module = courseModules[moduleKey];
+                    const moduleProgress = progress[moduleKey] || {
+                        completed: false,
+                        score: 0
+                    };
+
+                    if (moduleProgress.completed) {
+                        completedCount++;
+                        totalScore += moduleProgress.score || 0;
+                        totalPossible += 100; // Asumiendo 100 puntos por módulo
+                    }
+
+                    const progressItem = document.createElement('div');
+                    progressItem.className = 'progress-item';
+                    progressItem.innerHTML = `
+                <span>${module.title}</span>
+                <span class="${moduleProgress.completed ? 'progress-complete' : 'progress-incomplete'}">
+                    ${moduleProgress.completed ? `✓ Completado (${moduleProgress.score || 0}%)` : 'No completado'}
+                </span>
+            `;
+            moduleDetails.appendChild(progressItem);
+        });
+        
+        // Actualizar estadísticas
+        const progressStats = document.getElementById('progress-stats');
+        const completionPercentage = Math.round((completedCount / 6) * 100);
+        const averageScore = completedCount > 0 ? Math.round(totalScore / completedCount) : 0;
+        
+        progressStats.innerHTML = `
+            <p><strong>Progreso general:</strong> ${completionPercentage}% (${completedCount} de 6 módulos)</p>
+            <p><strong>Puntuación promedio:</strong> ${averageScore}%</p>
+            <p><strong>Tiempo estimado completado:</strong> ${completedCount * 15} de 90 minutos</p>
+        `;
+        
+        // Actualizar certificado
+        document.getElementById('student-name').textContent = studentName;
+        document.getElementById('completed-modules').textContent = completedCount;
+        document.getElementById('completion-date').textContent = new Date().toLocaleDateString('es-ES');
+        
+        // Función para reiniciar progreso
+        function resetProgress() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.')) {
+                localStorage.removeItem('teacchProgress');
+                localStorage.removeItem('teacchStudentName');
+                alert('Progreso reiniciado. Serás redirigido a la página principal.');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        // Verificar si es la primera visita a resultados
+        if (completedCount === 0) {
+            document.querySelector('.certificate').innerHTML = `
+                <h3>Curso en Progreso</h3>
+                <p>Aún no has completado ningún módulo. ¡Continúa aprendiendo!</p>
+                <p>Visita los módulos del curso para comenzar tu certificación.</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>

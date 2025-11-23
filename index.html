@@ -215,6 +215,15 @@
             <button id="start-course" aria-label="Comenzar el curso">Comenzar el Curso</button>
             <br>
         </section>
+
+        <!-- Progreso del usuario -->
+        <section id="user-progress" style="margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
+            <h2>Tu Progreso</h2>
+            <div id="progress-display">
+                <p>Cargando tu progreso...</p>
+            </div>
+            <button id="view-results" style="margin-top: 10px;">Ver Resultados Detallados</button>
+        </section>
     </main>
 
     <!-- Pie de página -->
@@ -256,7 +265,42 @@
                 console.log('Accediendo al módulo: ' + this.textContent);
             });
         });
+
+        // Mostrar progreso en página principal
+        document.addEventListener('DOMContentLoaded', function() {
+            const progress = JSON.parse(localStorage.getItem('teacchProgress')) || {};
+            const progressDisplay = document.getElementById('progress-display');
+            const viewResultsBtn = document.getElementById('view-results');
+
+            let completedCount = 0;
+            Object.keys(progress).forEach(moduleKey => {
+                if (progress[moduleKey].completed) completedCount++;
+            });
+
+            const percentage = Math.round((completedCount / 6) * 100);
+
+            progressDisplay.innerHTML = `
+        <div style="background: white; padding: 15px; border-radius: 6px;">
+            <p><strong>Progreso general:</strong> ${percentage}%</p>
+            <div style="background: #f0f0f0; border-radius: 10px; height: 20px; margin: 10px 0;">
+                <div style="background: #4a6fa5; width: ${percentage}%; height: 100%; border-radius: 10px; transition: width 0.5s;"></div>
+            </div>
+            <p>${completedCount} de 6 módulos completados</p>
+        </div>
+    `;
+
+            viewResultsBtn.onclick = () => window.location.href = 'resultados.html';
+
+            // Solicitar nombre si es primera vez
+            if (!localStorage.getItem('teacchStudentName')) {
+                const userName = prompt('Para personalizar tu experiencia, por favor ingresa tu nombre:');
+                if (userName) {
+                    localStorage.setItem('teacchStudentName', userName);
+                }
+            }
+        });
     </script>
+
 </body>
 
 </html>
