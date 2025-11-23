@@ -282,14 +282,14 @@
                     <h4>📚 Material Complementario</h4>
                     <p>Descarga el siguiente documento PDF para profundizar en los conceptos del método TEACCH:</p>
                     <a href="https://drive.google.com/file/d/1xhzrNvmXZoc1DxKkfjk7Wo2Ae3V80QMS/view?usp=sharing" target="_blank" class="pdf-link">
-                        <span class="pdf-icon">📄</span> Descargar PDF: Fundamentos del Método TEACCH
+                        <span class="pdf-icon">📄</span> Descargar PDF: Historia del Método TEACCH
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Actividad interactiva: Línea de tiempo -->
-        <section class="content-section activity" id="interactive-activity">
+        <!-- <section class="content-section activity" id="interactive-activity">
             <h2>Actividad Interactiva: Línea de Tiempo TEACCH</h2>
             <p>Arrastra los hitos históricos a la línea de tiempo en el orden correcto:</p>
 
@@ -308,11 +308,38 @@
                 <button id="check-timeline" style="align-self: flex-start;">Verificar orden</button>
                 <div id="timeline-feedback" class="feedback"></div>
             </div>
+        </section> -->
+
+        <!-- Actividad interactiva: Línea de tiempo -->
+        <section class="content-section activity" id="interactive-activity">
+            <h2>Actividad Interactiva: Línea de Tiempo TEACCH</h2>
+            <p>Arrastra los hitos históricos a la línea de tiempo en el orden correcto:</p>
+
+            <div class="timeline-activity">
+                <div id="timeline-items">
+                    <div class="timeline-item" data-year="1972">Reconocimiento estatal como programa oficial</div>
+                    <div class="timeline-item" data-year="1966">Inicio del proyecto TEACCH en Carolina del Norte</div>
+                    <div class="timeline-item" data-year="1990">Consolidación del enfoque estructurado</div>
+                    <div class="timeline-item" data-year="1980">Expansión internacional del modelo</div>
+                </div>
+
+                <div class="timeline-container" id="timeline-target">
+                    <p>Suelta los eventos aquí en orden cronológico...</p>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button id="check-timeline" style="align-self: flex-start;">Verificar orden</button>
+                    <button id="reset-timeline">Reiniciar actividad</button>
+                    <button id="return-incorrect" disabled>Regresar eventos erróneos</button>
+                </div>
+                <div id="timeline-feedback" class="feedback"></div>
+            </div>
         </section>
 
         <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: Conocimientos del Módulo 1</h2>
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente. </p>
 
             <div id="quiz-container">
                 <div class="quiz-question">
@@ -344,19 +371,6 @@
             </div>
         </section>
 
-        <!-- Recursos -->
-        <!-- <section class="content-section" id="resources">
-            <h2>Recursos del Módulo</h2>
-            <div id="resources-container">
-                <p><strong>Recursos multimedia sugeridos:</strong></p>
-                <ul>
-                    <li>Video introductorio animado sobre TEACCH</li>
-                    <li>Línea de tiempo interactiva con eventos históricos</li>
-                    <li>Documento PDF: "Principios fundamentales del TEACCH"</li>
-                </ul>
-            </div>
-        </section> -->
-
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom" disabled>← Módulo Anterior</button>
@@ -364,9 +378,9 @@
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
-        <div style="text-align: center; margin-top: 20px;">
+        <!-- <div style="text-align: center; margin-top: 20px;">
             <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -448,13 +462,93 @@
         }
 
         // ACTIVIDAD DE LÍNEA DE TIEMPO
+        // function setupTimelineActivity() {
+        //     const items = document.querySelectorAll('.timeline-item');
+        //     const target = document.getElementById('timeline-target');
+        //     const checkButton = document.getElementById('check-timeline');
+        //     const feedback = document.getElementById('timeline-feedback');
+
+        //     let draggedItem = null;
+
+        //     // Configurar drag and drop
+        //     items.forEach(item => {
+        //         item.setAttribute('draggable', 'true');
+
+        //         item.addEventListener('dragstart', function() {
+        //             draggedItem = this;
+        //             setTimeout(() => this.style.display = 'none', 0);
+        //         });
+
+        //         item.addEventListener('dragend', function() {
+        //             setTimeout(() => {
+        //                 this.style.display = 'block';
+        //                 draggedItem = null;
+        //             }, 0);
+        //         });
+        //     });
+
+        //     target.addEventListener('dragover', function(e) {
+        //         e.preventDefault();
+        //     });
+
+        //     target.addEventListener('drop', function(e) {
+        //         e.preventDefault();
+        //         if (draggedItem) {
+        //             // Verificar si el elemento ya está en la línea de tiempo
+        //             if (!target.contains(draggedItem)) {
+        //                 target.appendChild(draggedItem);
+        //                 draggedItem.style.margin = '5px 0';
+        //             }
+        //         }
+        //     });
+
+        //     // Verificar orden correcto
+        //     checkButton.addEventListener('click', function() {
+        //         const placedItems = target.querySelectorAll('.timeline-item');
+        //         const correctOrder = ['1966', '1972', '1980', '1990'];
+        //         let isCorrect = true;
+
+        //         if (placedItems.length !== correctOrder.length) {
+        //             isCorrect = false;
+        //         } else {
+        //             placedItems.forEach((item, index) => {
+        //                 if (item.getAttribute('data-year') !== correctOrder[index]) {
+        //                     isCorrect = false;
+        //                 }
+        //             });
+        //         }
+
+        //         if (isCorrect) {
+        //             feedback.textContent = '¡Correcto! Has ordenado la línea de tiempo en el orden histórico adecuado.';
+        //             feedback.className = 'feedback correct';
+        //             feedback.style.display = 'block';
+        //         } else {
+        //             feedback.textContent = 'El orden no es correcto. Intenta nuevamente. Orden correcto: 1966 → 1972 → 1980 → 1990';
+        //             feedback.className = 'feedback incorrect';
+        //             feedback.style.display = 'block';
+        //         }
+        //     });
+        // }
+
+        // ACTIVIDAD DE LÍNEA DE TIEMPO
         function setupTimelineActivity() {
             const items = document.querySelectorAll('.timeline-item');
             const target = document.getElementById('timeline-target');
             const checkButton = document.getElementById('check-timeline');
+            const resetButton = document.getElementById('reset-timeline');
+            const returnIncorrectButton = document.getElementById('return-incorrect');
             const feedback = document.getElementById('timeline-feedback');
 
             let draggedItem = null;
+            let originalOrder = []; // Para almacenar el orden original
+
+            // Guardar el orden original de los elementos
+            items.forEach(item => {
+                originalOrder.push({
+                    element: item,
+                    parent: item.parentNode
+                });
+            });
 
             // Configurar drag and drop
             items.forEach(item => {
@@ -508,11 +602,60 @@
                     feedback.textContent = '¡Correcto! Has ordenado la línea de tiempo en el orden histórico adecuado.';
                     feedback.className = 'feedback correct';
                     feedback.style.display = 'block';
+                    returnIncorrectButton.disabled = true; // Deshabilitar ya que no hay errores
                 } else {
                     feedback.textContent = 'El orden no es correcto. Intenta nuevamente. Orden correcto: 1966 → 1972 → 1980 → 1990';
                     feedback.className = 'feedback incorrect';
                     feedback.style.display = 'block';
+                    returnIncorrectButton.disabled = false; // Habilitar para regresar eventos erróneos
                 }
+            });
+
+            // Reiniciar actividad
+            resetButton.addEventListener('click', function() {
+                // Limpiar la línea de tiempo
+                target.innerHTML = '<p>Suelta los eventos aquí en orden cronológico...</p>';
+
+                // Restaurar elementos a su posición original
+                const timelineItems = document.getElementById('timeline-items');
+                timelineItems.innerHTML = '';
+                originalOrder.forEach(item => {
+                    timelineItems.appendChild(item.element);
+                });
+
+                // Limpiar feedback
+                feedback.style.display = 'none';
+                feedback.textContent = '';
+
+                // Deshabilitar botón de regresar eventos erróneos
+                returnIncorrectButton.disabled = true;
+            });
+
+            // Regresar eventos erróneos a su posición original
+            returnIncorrectButton.addEventListener('click', function() {
+                const placedItems = target.querySelectorAll('.timeline-item');
+                const correctOrder = ['1966', '1972', '1980', '1990'];
+                const incorrectItems = [];
+
+                // Identificar elementos incorrectos
+                placedItems.forEach((item, index) => {
+                    if (item.getAttribute('data-year') !== correctOrder[index]) {
+                        incorrectItems.push(item);
+                    }
+                });
+
+                // Mover elementos incorrectos de vuelta a su posición original
+                incorrectItems.forEach(item => {
+                    document.getElementById('timeline-items').appendChild(item);
+                });
+
+                // Deshabilitar botón después de usarlo
+                this.disabled = true;
+
+                // Actualizar feedback
+                feedback.textContent = 'Los eventos incorrectos han sido devueltos. Continúa intentando con los restantes.';
+                feedback.className = 'feedback correct';
+                feedback.style.display = 'block';
             });
         }
 
@@ -558,12 +701,23 @@
                 quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
                 quizResult.style.display = 'block';
 
+                // Convertir a porcentaje
+                const percent = Math.round((score / totalQuestions) * 100);
+
                 if (score === totalQuestions) {
                     quizResult.textContent += ' ¡Excelente! Has comprendido los conceptos clave del módulo.';
                 } else if (score >= 2) {
                     quizResult.textContent += ' Buen trabajo, pero revisa los conceptos que no acertaste.';
                 } else {
                     quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
+                }
+
+                // if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
+                //     saveModuleProgress(score);
+                // }
+                // Guadar progreso si alcanza 60% o más
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
                 }
             });
         }
@@ -583,17 +737,6 @@
             console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
 
-        // Modificar el evento de envío del quiz para guardar progreso
-        submitButton.addEventListener('click', function() {
-            // ... código existente para calcular score ...
-
-            // GUARDAR PROGRESO - Añadir esta línea al final
-            if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
-                saveModuleProgress(score);
-            }
-
-            // ... resto del código existente ...
-        });
 
         // INICIALIZAR AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {

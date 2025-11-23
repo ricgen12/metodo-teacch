@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo | Curso TEACCH</title>
+    <title>Módulo 2: Beneficios del método TEACCH | Curso TEACCH</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -402,6 +402,7 @@
         <!-- EVALUACIÓN: FALSO/VERDADERO -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: ¿Verdadero o Falso?</h2>
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente.</p>
 
             <div id="quiz-container">
                 <div class="quiz-question">
@@ -440,12 +441,13 @@
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
-        <div style="text-align: center; margin-top: 20px;">
+        <!-- <div style="text-align: center; margin-top: 20px;">
             <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -716,6 +718,11 @@
                 if (score === totalQuestions) {
                     quizResult.textContent += ' ¡Perfecto! Dominas los beneficios del TEACCH.';
                 }
+                // Guardar progreso si se alcanza el 60% o más
+                const percent = Math.round((score / totalQuestions) * 100);
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
+                }
             });
         }
 
@@ -733,18 +740,6 @@
             localStorage.setItem('teacchProgress', JSON.stringify(progress));
             console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
-
-        // Modificar el evento de envío del quiz para guardar progreso
-        submitButton.addEventListener('click', function() {
-            // ... código existente para calcular score ...
-
-            // GUARDAR PROGRESO - Añadir esta línea al final
-            if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
-                saveModuleProgress(score);
-            }
-
-            // ... resto del código existente ...
-        });
 
         // Inicializar cuando cargue la página
         document.addEventListener('DOMContentLoaded', function() {
