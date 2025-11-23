@@ -443,6 +443,9 @@
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
+        </div>
     </div>
 
     <script>
@@ -715,6 +718,33 @@
                 }
             });
         }
+
+        // Guardar progreso al completar el quiz
+        function saveModuleProgress(score) {
+            const currentModule = getCurrentModule();
+            const progress = JSON.parse(localStorage.getItem('teacchProgress')) || {};
+
+            progress[currentModule] = {
+                completed: true,
+                score: score,
+                completedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('teacchProgress', JSON.stringify(progress));
+            console.log(`Progreso de ${currentModule} guardado: ${score}%`);
+        }
+
+        // Modificar el evento de envío del quiz para guardar progreso
+        submitButton.addEventListener('click', function() {
+            // ... código existente para calcular score ...
+
+            // GUARDAR PROGRESO - Añadir esta línea al final
+            if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
+                saveModuleProgress(score);
+            }
+
+            // ... resto del código existente ...
+        });
 
         // Inicializar cuando cargue la página
         document.addEventListener('DOMContentLoaded', function() {
