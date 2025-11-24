@@ -512,7 +512,7 @@
         <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: Conocimientos del Módulo 5</h2>
-
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente.</p>
             <div id="quiz-container">
                 <div class="quiz-question">
                     <p><strong>1. ¿Cuál es el principal beneficio de usar agendas visuales en estudiantes con TEA?</strong></p>
@@ -570,6 +570,7 @@
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
@@ -728,7 +729,7 @@
             const timeSlots = document.querySelectorAll('.time-slot');
             const checkButton = document.getElementById('check-schedule');
             const resetButton = document.getElementById('reset-activity');
-            const showErrorsButton = document.getElementById('show-errors');
+            // showErrorsButton eliminado (botón no existe)
             const feedback = document.getElementById('schedule-feedback');
 
             let draggedItem = null;
@@ -794,9 +795,6 @@
                     feedback.textContent = '¡Excelente! Has creado un horario visual estructurado que proporciona predictibilidad y reduce la ansiedad.';
                     feedback.className = 'feedback correct';
                     feedback.style.display = 'block';
-
-                    // Habilitar el botón de mostrar errores
-                    showErrorsButton.disabled = false;
                 } else {
                     feedback.textContent = 'El horario necesita más actividades. Intenta llenar al menos 4 espacios para crear una rutina diaria efectiva.';
                     feedback.className = 'feedback incorrect';
@@ -830,17 +828,9 @@
 
                 // Ocultar feedback
                 feedback.style.display = 'none';
-
-                // Deshabilitar botón de mostrar errores
-                showErrorsButton.disabled = true;
             });
 
-            // Mostrar situaciones erróneas
-            showErrorsButton.addEventListener('click', function() {
-                // Aquí podrías implementar lógica para destacar errores específicos
-                // Por ahora, simplemente mostraremos un mensaje
-                alert('En una implementación completa, aquí se mostrarían las situaciones problemáticas detectadas en el horario.');
-            });
+            // Nota: lógica para "mostrar errores" eliminada porque el botón ya no existe
         }
 
         // EVALUACIÓN QUIZ
@@ -893,7 +883,28 @@
                 } else {
                     quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
                 }
+
+                // Guardar progreso si se alcanza el 60% o más
+                const percent = Math.round((score / totalQuestions) * 100);
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
+                }
             });
+        }
+
+        // Guardar progreso al completar el quiz
+        function saveModuleProgress(score) {
+            const currentModule = getCurrentModule();
+            const progress = JSON.parse(localStorage.getItem('teacchProgress')) || {};
+
+            progress[currentModule] = {
+                completed: true,
+                score: score,
+                completedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('teacchProgress', JSON.stringify(progress));
+            console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
 
         // INICIALIZAR AL CARGAR LA PÁGINA

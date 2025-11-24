@@ -718,6 +718,7 @@
                 if (score === totalQuestions) {
                     quizResult.textContent += ' ¡Perfecto! Dominas los beneficios del TEACCH.';
                 }
+
                 // Guardar progreso si se alcanza el 60% o más
                 const percent = Math.round((score / totalQuestions) * 100);
                 if (percent >= 60) {

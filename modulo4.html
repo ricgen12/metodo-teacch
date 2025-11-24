@@ -411,7 +411,7 @@
         <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: Conocimientos del Módulo 4</h2>
-
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente.</p>
             <div id="quiz-container">
                 <div class="quiz-question">
                     <p><strong>1. ¿Cuál es el propósito principal de la estructura física en TEACCH?</strong></p>
@@ -466,6 +466,7 @@
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
@@ -759,12 +760,20 @@
                 quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
                 quizResult.style.display = 'block';
 
+                // Convertir a porcentaje
+                const percent = Math.round((score / totalQuestions) * 100);
+
                 if (score === totalQuestions) {
                     quizResult.textContent += ' ¡Excelente! Has comprendido los principios de estructura física y sistemas de trabajo.';
                 } else if (score >= 3) {
                     quizResult.textContent += ' Buen trabajo, pero revisa los conceptos que no acertaste.';
                 } else {
                     quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
+                }
+
+                // Guadar progreso si alcanza 60% o más
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
                 }
             });
         }
@@ -783,18 +792,6 @@
             localStorage.setItem('teacchProgress', JSON.stringify(progress));
             console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
-
-        // Modificar el evento de envío del quiz para guardar progreso
-        submitButton.addEventListener('click', function() {
-            // ... código existente para calcular score ...
-
-            // GUARDAR PROGRESO - Añadir esta línea al final
-            if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
-                saveModuleProgress(score);
-            }
-
-            // ... resto del código existente ...
-        });
 
         // INICIALIZAR AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {

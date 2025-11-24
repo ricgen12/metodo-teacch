@@ -454,7 +454,7 @@
         <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: Conocimientos del Módulo 3</h2>
-
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente.</p>
             <div id="quiz-container">
                 <div class="quiz-question">
                     <p><strong>1. ¿Cuál es el objetivo principal de la enseñanza estructurada en TEACCH?</strong></p>
@@ -466,16 +466,16 @@
 
                 <div class="quiz-question">
                     <p><strong>2. ¿Por qué se enfatiza el aprendizaje visual en TEACCH?</strong></p>
-                    <input type="radio" name="q2" value="a"> a) Porque es más barato que otros métodos<br>
-                    <input type="radio" name="q2" value="b"> b) Porque las personas con TEA suelen tener habilidades visuales más desarrolladas<br>
+                    <input type="radio" name="q2" value="a"> a) Porque las personas con TEA suelen tener habilidades visuales más desarrolladas<br>
+                    <input type="radio" name="q2" value="b"> b) Porque es más barato que otros métodos<br>
                     <input type="radio" name="q2" value="c"> c) Porque los profesores prefieren métodos visuales<br>
                     <div id="feedback-q2" class="feedback"></div>
                 </div>
 
                 <div class="quiz-question">
                     <p><strong>3. ¿Cuál de estos NO es uno de los cuatro componentes clave de la enseñanza estructurada?</strong></p>
-                    <input type="radio" name="q3" value="a"> a) Estructura física del entorno<br>
-                    <input type="radio" name="q3" value="b"> b) Terapia del habla intensiva<br>
+                    <input type="radio" name="q3" value="a"> a) Terapia del habla intensiva<br>
+                    <input type="radio" name="q3" value="b"> b) Estructura física del entorno<br>
                     <input type="radio" name="q3" value="c"> c) Sistemas de trabajo<br>
                     <div id="feedback-q3" class="feedback"></div>
                 </div>
@@ -509,6 +509,7 @@
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom">Siguiente Módulo →</button>
         </div>
@@ -758,8 +759,8 @@
                 // Respuestas correctas
                 const correctAnswers = {
                     q1: 'b',
-                    q2: 'b',
-                    q3: 'b',
+                    q2: 'a',
+                    q3: 'a',
                     q4: 'b'
                 };
 
@@ -792,12 +793,20 @@
                 quizResult.className = `feedback ${score === totalQuestions ? 'correct' : 'incorrect'}`;
                 quizResult.style.display = 'block';
 
+                // Convertir a porcentaje
+                const percent = Math.round((score / totalQuestions) * 100);
+
                 if (score === totalQuestions) {
                     quizResult.textContent += ' ¡Excelente! Has comprendido los conceptos clave de la enseñanza estructurada.';
                 } else if (score >= 3) {
                     quizResult.textContent += ' Buen trabajo, pero revisa los conceptos que no acertaste.';
                 } else {
                     quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
+                }
+
+                // Guadar progreso si alcanza 60% o más
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
                 }
             });
         }
@@ -816,18 +825,6 @@
             localStorage.setItem('teacchProgress', JSON.stringify(progress));
             console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
-
-        // Modificar el evento de envío del quiz para guardar progreso
-        submitButton.addEventListener('click', function() {
-            // ... código existente para calcular score ...
-
-            // GUARDAR PROGRESO - Añadir esta línea al final
-            if (score >= 60) { // Solo guardar si pasa el mínimo (60%)
-                saveModuleProgress(score);
-            }
-
-            // ... resto del código existente ...
-        });
 
         // INICIALIZAR AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {
