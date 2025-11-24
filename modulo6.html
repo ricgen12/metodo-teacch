@@ -413,20 +413,20 @@
         <!-- Evaluación: Mini quiz -->
         <section class="content-section quiz" id="evaluation">
             <h2>Evaluación: Conocimientos del Módulo 6</h2>
-
+            <p>Consigue 60% o más y guardaremos tu progreso automáticamente.</p>
             <div id="quiz-container">
                 <div class="quiz-question">
                     <p><strong>1. ¿Cuál es el rol principal del psicólogo educativo según el enfoque TEACCH?</strong></p>
-                    <input type="radio" name="q1" value="a"> a) Aplicar pruebas estandarizadas de forma aislada<br>
-                    <input type="radio" name="q1" value="b"> b) Actuar como intérprete transcultural entre mundos<br>
+                    <input type="radio" name="q1" value="a"> a) Actuar como intérprete transcultural entre mundos<br>
+                    <input type="radio" name="q1" value="b"> b) Aplicar pruebas estandarizadas de forma aislada<br>
                     <input type="radio" name="q1" value="c"> c) Enfocarse exclusivamente en el rendimiento académico<br>
                     <div id="feedback-q1" class="feedback"></div>
                 </div>
 
                 <div class="quiz-question">
                     <p><strong>2. Según el concepto de "cultura del autismo", las personas con TEA son:</strong></p>
-                    <input type="radio" name="q2" value="a"> a) Inferiores a las personas neurotípicas<br>
-                    <input type="radio" name="q2" value="b"> b) Diferentes pero no inferiores<br>
+                    <input type="radio" name="q2" value="a"> a) Diferentes pero no inferiores<br>
+                    <input type="radio" name="q2" value="b"> b) Inferiores a las personas neurotípicas<br>
                     <input type="radio" name="q2" value="c"> c) Exactamente iguales que las personas neurotípicas<br>
                     <div id="feedback-q2" class="feedback"></div>
                 </div>
@@ -434,16 +434,16 @@
                 <div class="quiz-question">
                     <p><strong>3. ¿Cuál de estas NO es una función principal del psicólogo educativo en TEACCH?</strong></p>
                     <input type="radio" name="q3" value="a"> a) Evaluación individualizada<br>
-                    <input type="radio" name="q3" value="b"> b) Diseño de entornos estructurados<br>
-                    <input type="radio" name="q3" value="c"> c) Prescribir medicación<br>
+                    <input type="radio" name="q3" value="b"> b) Prescribir medicación<br>
+                    <input type="radio" name="q3" value="c"> c) Diseño de entornos estructurados<br>
                     <div id="feedback-q3" class="feedback"></div>
                 </div>
 
                 <div class="quiz-question">
                     <p><strong>4. El modelo de servicio comprehensivo de TEACCH abarca:</strong></p>
                     <input type="radio" name="q4" value="a"> a) Solo la etapa escolar<br>
-                    <input type="radio" name="q4" value="b"> b) Todas las etapas del desarrollo<br>
-                    <input type="radio" name="q4" value="c"> c) Exclusivamente la primera infancia<br>
+                    <input type="radio" name="q4" value="b"> b) Exclusivamente la primera infancia<br>
+                    <input type="radio" name="q4" value="c"> c) Todas las etapas del desarrollo<br>
                     <div id="feedback-q4" class="feedback"></div>
                 </div>
 
@@ -478,6 +478,7 @@
         <!-- Navegación inferior -->
         <div class="nav-buttons">
             <button id="prev-module-bottom">← Módulo Anterior</button>
+            <button onclick="window.location.href='resultados.html'">Ver Mi Progreso</button>
             <button id="home-button-bottom">Inicio</button>
             <button id="next-module-bottom" disabled>Siguiente Módulo →</button>
         </div>
@@ -604,10 +605,10 @@
             submitButton.addEventListener('click', function() {
                 // Respuestas correctas
                 const correctAnswers = {
-                    q1: 'b',
-                    q2: 'b',
-                    q3: 'c',
-                    q4: 'b',
+                    q1: 'a',
+                    q2: 'a',
+                    q3: 'b',
+                    q4: 'c',
                     q5: 'b'
                 };
 
@@ -647,7 +648,28 @@
                 } else {
                     quizResult.textContent += ' Te recomendamos repasar el contenido del módulo.';
                 }
+
+                // Guardar progreso si se alcanza el 60% o más
+                const percent = Math.round((score / totalQuestions) * 100);
+                if (percent >= 60) {
+                    saveModuleProgress(percent);
+                }
             });
+        }
+
+        // Guardar progreso al completar el quiz
+        function saveModuleProgress(score) {
+            const currentModule = getCurrentModule();
+            const progress = JSON.parse(localStorage.getItem('teacchProgress')) || {};
+
+            progress[currentModule] = {
+                completed: true,
+                score: score,
+                completedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('teacchProgress', JSON.stringify(progress));
+            console.log(`Progreso de ${currentModule} guardado: ${score}%`);
         }
 
         // INICIALIZAR AL CARGAR LA PÁGINA
